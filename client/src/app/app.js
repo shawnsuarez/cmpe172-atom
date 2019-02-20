@@ -4,6 +4,8 @@ import { MyProvider, AppContext } from "./context/context";
 import "./style/app.css";
 
 import FrontPage from "../pages/FrontPage";
+import TeamPage from "../pages/TeamPage";
+import PayrollPage from "../pages/PayrollPage";
 
 class App extends Component {
   render() {
@@ -19,6 +21,16 @@ class App extends Component {
                       exact
                       path="/"
                       render={props => <FrontPage {...props} {...context} />}
+                    />
+                    <Route
+                      exact
+                      path="/teams"
+                      render={props => <TeamPage {...props} {...context} />}
+                    />
+                    <Route
+                      exact
+                      path="/payroll"
+                      render={props => <PayrollPage {...props} {...context} />}
                     />
                   </React.Fragment>
                 );

@@ -10,8 +10,6 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "global": "npm install && cd client && npm install"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",

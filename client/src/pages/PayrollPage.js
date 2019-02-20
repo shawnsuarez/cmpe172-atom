@@ -4,7 +4,7 @@ import Navbar from "../components/navbar/navbar.js";
 
 import { AppContext } from "../app/context/context";
 
-class FrontPage extends Component {
+class PayrollPage extends Component {
   constructor(props) {
     super(props);
   }
@@ -14,11 +14,11 @@ class FrontPage extends Component {
 
     return (
       <div>
-        <Navbar activeItem={"home"}/>
-        <h1>Front Page</h1>
+        <Navbar activeItem={"payroll"}/>
+        <h1>Payroll Page</h1>
       </div>
     );
   }
 }
 
-export default FrontPage;
+export default PayrollPage;
