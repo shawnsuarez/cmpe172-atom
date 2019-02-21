@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "../components/navbar/navbar.js";
+import TeamTable from '../components/teamTable/TeamTable.js';
 
 
 import { AppContext } from "../app/context/context";
@@ -15,7 +16,8 @@ class TeamPage extends Component {
     return (
       <div>
         <Navbar activeItem={"teams"}/>
-        <h1>Team Page</h1>
+        <h1>Teams</h1>
+        <TeamTable />
       </div>
     );
   }
