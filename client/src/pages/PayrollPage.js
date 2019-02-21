@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "../components/navbar/navbar.js";
-
+import PayrollTable from '../components/payrollTable/PayrollTable.js';
 
 import { AppContext } from "../app/context/context";
 
@@ -16,6 +16,7 @@ class PayrollPage extends Component {
       <div>
         <Navbar activeItem={"payroll"}/>
         <h1>Payroll Page</h1>
+        <PayrollTable />
       </div>
     );
   }
