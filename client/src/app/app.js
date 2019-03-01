@@ -8,7 +8,9 @@ import TeamPage from "../pages/TeamPage";
 import PayrollPage from "../pages/PayrollPage";
 
 class App extends Component {
+
   render() {
+
     return (
       <div className="App">
         <BrowserRouter>
@@ -40,6 +42,7 @@ class App extends Component {
         </BrowserRouter>
       </div>
     );
+
   }
 }
 

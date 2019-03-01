@@ -11,6 +11,7 @@
     "global": "npm install && cd client && npm install"
   },
   "dependencies": {
+    "auth0-js": "^9.10.0",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -18,6 +19,7 @@
     "nodemon": "^1.18.10",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react": "^16.8.3"
   }
 }

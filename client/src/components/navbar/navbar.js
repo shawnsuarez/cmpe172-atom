@@ -13,9 +13,9 @@ class Navbar extends Component {
 
     return (
       <Menu>
-        <Menu.Item 
-          name="home" 
-          active={activeItem === "home"} 
+        <Menu.Item
+          name="home"
+          active={activeItem === "home"}
           href="/"
         />
         <Menu.Item
@@ -26,8 +26,9 @@ class Navbar extends Component {
         <Menu.Item
           name="payroll"
           active={activeItem === "payroll"}
-          href="payroll"
+          href="/payroll"
         />
+
         <Menu.Menu position="right">
           <Menu.Item>
             <Input icon="search" placeholder="Search..." />

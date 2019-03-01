@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "../components/navbar/navbar.js";
 
-
 import { AppContext } from "../app/context/context";
 
 class FrontPage extends Component {
@@ -9,7 +8,9 @@ class FrontPage extends Component {
     super(props);
   }
 
+
   render() {
+
     const { context } = this.props;
 
     return (
