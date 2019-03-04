@@ -8,7 +8,8 @@
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "global": "npm install && cd client && npm install"
+    "global": "npm install && cd client && npm install",
+    "postinstall": "npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
     "concurrently": "^4.1.0",
