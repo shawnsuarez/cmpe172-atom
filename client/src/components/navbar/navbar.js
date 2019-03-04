@@ -26,17 +26,12 @@ class Navbar extends Component {
         <Menu.Item
           name="payroll"
           active={activeItem === "payroll"}
-          href="payroll"
+          href="/payroll"
         />
         <Menu.Menu position="right">
           <Menu.Item>
             <Input icon="search" placeholder="Search..." />
           </Menu.Item>
-          <Menu.Item
-            name="sign in"
-            active={activeItem === "sign in"}
-            onClick={this.handleItemClick}
-          />
           <Menu.Item
             name="logout"
             active={activeItem === "logout"}
