@@ -18,9 +18,9 @@ export default class Auth{
     }
 
   auth0 = new auth0.WebAuth({
-    domain: 'dev-xhqgmtvr.auth0.com',
-    clientID: 'euS0v0alrXb4gXWm6sz4pMnFZsgth9dB',
-    redirectUri: 'http://localhost:3000/callback',
+    domain: 'dev-rlppi4x4.auth0.com',
+    clientID: 'ML3BDi478nGqejP9FDH5evCLQW8qpSB5',
+    redirectUri: 'http://localhost:3000/home',
     responseType: 'token id_token',
     scope: 'openid'
   });
@@ -41,7 +41,7 @@ export default class Auth{
     });
   }
 
-  getAccessToken() {
+ getAccessToken() {
    return this.accessToken;
  }
 
@@ -75,7 +75,7 @@ export default class Auth{
    });
  }
 
- logout() {
+logout() {
    // Remove tokens and expiry time
    this.accessToken = null;
    this.idToken = null;
