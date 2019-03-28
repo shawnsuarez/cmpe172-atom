@@ -1,7 +1,29 @@
+import React from "react";
 import ReactDOM from "react-dom";
-import "semantic-ui-css/semantic.min.css";
-import {makeMainRoutes} from './routes';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-const routes = makeMainRoutes();
+import HomePage from "./pages/home";
+import DashboardPage from "./pages/dashboard";
+import CallbackPage from "./pages/callback";
+import Auth from "./components/Auth";
 
-ReactDOM.render(routes, document.getElementById("root"));
+function App() {
+  return (
+    <div>
+      <Auth>
+        <div>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={HomePage}/>
+              <Route path="/dashboard" component={DashboardPage}/>
+              <Route path="/callback" component={CallbackPage}/>
+            </Switch>
+          </Router>
+        </div>
+      </Auth>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App/>, rootElement);
