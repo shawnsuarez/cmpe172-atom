@@ -1,41 +1,42 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { AuthConsumer } from "../authContext";
 import Logout from './Logout';
 
 class Navbar extends Component {
-  state = {
-    activeItem: this.props.activeItem,
-  }
 
   render() {
-    const { activeItem } = this.state;
-
     return (
       <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Teams</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Payroll</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-          </ul>
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{margin:"0 1em 0 0"}}>Search</button>
-            <Logout/>
-          </form>
-        </nav>
+      <AuthConsumer>
+        {({ user }) => (
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <Link class="nav-link" to="/dashboard">Dashboard</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/teams">Teams</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/payroll">Payroll</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/about">About</Link>
+              </li>
+            </ul>
+            <h3 style={{margin:"0 2em"}}>{user.role}</h3>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{margin:"0 1em 0 0"}}>Search</button>
+              <Logout/>
+            </form>
+          </nav>
+        )}
+      </AuthConsumer>
       </div>
+
     )
   }
 }

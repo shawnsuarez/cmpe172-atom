@@ -1,33 +1,26 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 
-import { AuthConsumer } from "../authContext";
 import Navbar from '../components/Navbar';
-import Can from "../components/Can";
-import Logout from "../components/Logout";
-import EmployeeTable from '../components/EmployeeTable';
+import {AuthConsumer} from '../authContext';
+import Can from '../components/Can';
 
 const DashboardPage = () => (
-  <div>
-    <AuthConsumer>
-      {({ user }) => (
-        <Can
-          role={user.role}
-          perform="dashboard-page:visit"
-          yes={() => (
-            <div>
-              <Navbar />
-              <h1>Role: {user.role}</h1>
-            </div>
-          )}
-          no={() => (
-            <Redirect to="/" />
-          )}
-        />
-      )}
-    </AuthConsumer>
-
-  </div>
+  <AuthConsumer>
+    {({ user }) => (
+      <Can
+        role={user.role}
+        perform="dashboard-page:visit"
+        yes={() => (
+          <div>
+            <Navbar user={user}/>
+            <h1>Dashboard</h1>
+          </div>
+        )}
+        no={() => <Redirect to="/" />}
+      />
+    )}
+  </AuthConsumer>
 );
 
 export default DashboardPage;

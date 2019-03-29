@@ -4,6 +4,9 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import HomePage from "./pages/home";
 import DashboardPage from "./pages/dashboard";
+import Teams from './pages/teamPage';
+import Payroll from './pages/payrollPage';
+import About from './pages/about';
 import CallbackPage from "./pages/callback";
 import Auth from "./components/Auth";
 
@@ -16,6 +19,9 @@ function App() {
             <Switch>
               <Route exact path="/" component={HomePage}/>
               <Route path="/dashboard" component={DashboardPage}/>
+              <Route path="/teams" component={Teams}/>
+              <Route path="/payroll" component={Payroll}/>
+              <Route path="/about" component={About}/>
               <Route path="/callback" component={CallbackPage}/>
             </Switch>
           </Router>
