@@ -31,7 +31,8 @@ class Navbar extends Component {
           </ul>
           <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><Logout/></button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style={{margin:"0 1em 0 0"}}>Search</button>
+            <Logout/>
           </form>
         </nav>
       </div>
