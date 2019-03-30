@@ -16,7 +16,9 @@ const PayrollPage = () => {
             yes={() => (
               <div>
                 <Navbar user={user}/>
-                <h1>Payroll</h1>
+                <div style={{padding:"1em"}}>
+                  <h1>Payroll</h1>
+                </div>
               </div>
             )}
             no={() => <Redirect to="/" />}

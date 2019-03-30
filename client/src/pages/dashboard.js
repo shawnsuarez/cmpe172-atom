@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import {AuthConsumer} from '../authContext';
 import Can from '../components/Can';
+import EmployeeTable from '../components/EmployeeTable';
 
 const DashboardPage = () => (
   <AuthConsumer>
@@ -14,7 +15,10 @@ const DashboardPage = () => (
         yes={() => (
           <div>
             <Navbar user={user}/>
-            <h1>Dashboard</h1>
+            <div style={{padding:"1em"}}>
+              <h1>Dashboard</h1>
+              <EmployeeTable />
+            </div>
           </div>
         )}
         no={() => <Redirect to="/" />}

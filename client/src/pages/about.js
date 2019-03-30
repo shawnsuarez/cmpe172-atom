@@ -16,7 +16,10 @@ const AboutPage = () => {
             yes={() => (
               <div>
                 <Navbar user={user}/>
-                <h1>About</h1>
+                <div style={{padding:"1em"}}>
+                  <h1>About</h1>
+                  <h6>Made by Sukhvir Singh, Shawn Darrell Suarez, Xueli Yang</h6>
+                </div>
               </div>
             )}
             no={() => <Redirect to="/" />}
