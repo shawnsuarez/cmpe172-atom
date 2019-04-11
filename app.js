@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(bodyParser.json());
 
-/*// Static file declaration
+// Static file declaration
 app.use("/static", express.static(path.join(__dirname, 'client/build')));
 
 // production mode
@@ -24,10 +24,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 
-app.get("/secret" , (req, res) => {
-	res.send("Welcome to the backend");
-});
-*/
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
