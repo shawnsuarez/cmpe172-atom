@@ -1,10 +1,14 @@
-const express = require("express");
-const path = require('path');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mysql = require("mysql");
 const PORT = process.env.PORT || 8080;
 
-const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
-// Static file declaration
+/*// Static file declaration
 app.use("/static", express.static(path.join(__dirname, 'client/build')));
 
 // production mode
@@ -20,10 +24,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 
-app.get("/" , (req, res) => {
-	console.log("Front Page");
+app.get("/secret" , (req, res) => {
+	res.send("Welcome to the backend");
 });
+*/
 
-app.listen(PORT, () => {
-  console.log(`NODE server listening on port ${ PORT }!`);
+app.listen(PORT, function() {
+    console.log("Server is running on Port: " + PORT);
 });
