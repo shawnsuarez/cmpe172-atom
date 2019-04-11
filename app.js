@@ -24,6 +24,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 
+app.get("/" , (req, res) => {
+	console.log("Front page");
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
