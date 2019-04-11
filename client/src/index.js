@@ -1,6 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './app/app';
-import "semantic-ui-css/semantic.min.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import HomePage from "./pages/home";
+import DashboardPage from "./pages/dashboard";
+import Teams from './pages/teamPage';
+import Payroll from './pages/payrollPage';
+import About from './pages/about';
+import CallbackPage from "./pages/callback";
+import Auth from "./components/Auth";
+
+function App() {
+  return (
+    <div>
+      <Auth>
+        <div>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={HomePage}/>
+              <Route path="/dashboard" component={DashboardPage}/>
+              <Route path="/teams" component={Teams}/>
+              <Route path="/payroll" component={Payroll}/>
+              <Route path="/about" component={About}/>
+              <Route path="/callback" component={CallbackPage}/>
+            </Switch>
+          </Router>
+        </div>
+      </Auth>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App/>, rootElement);
