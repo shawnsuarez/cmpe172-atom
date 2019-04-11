@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import {AuthConsumer} from '../authContext';
 import Can from '../components/Can';
 
-const TeamPage = () => {
+const DepartmentPage = () => {
   return(
     <div>
       <AuthConsumer>
@@ -17,7 +17,7 @@ const TeamPage = () => {
               <div>
                 <Navbar user={user}/>
                 <div style={{padding:"1em"}}>
-                  <h1>Teams</h1>
+                  <h1>Departments</h1>
                 </div>
               </div>
             )}
@@ -29,4 +29,4 @@ const TeamPage = () => {
   );
 }
 
-export default TeamPage;
+export default DepartmentPage;

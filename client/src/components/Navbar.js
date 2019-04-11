@@ -17,10 +17,7 @@ class Navbar extends Component {
                 <Link class="nav-link" to="/dashboard">Dashboard<span class="sr-only">(current)</span></Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/teams">Teams</Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/payroll">Payroll</Link>
+                <Link class="nav-link" to="/departments">Departments</Link>
               </li>
               <li class="nav-item">
                 <Link class="nav-link" to="/about">About</Link>
