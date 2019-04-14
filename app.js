@@ -38,24 +38,19 @@ if(process.env.NODE_ENV === 'production') {
 };
 
 // build mode
-/*app.get('*', (req, res) => {
+app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname+'/client/public/index.html'));
-});
-*/
-app.get("/", (req, res) => {
-
 });
 
 app.get("/employeestest/:page" , (req, res) => {
 	let page = parseInt(req.params.page) * 20;
-	connection.connect();
 	// LIMIT # OFFSET = PAGE # * EMPLOYEES/PAGE
+	// Returns emp_no, first_name, last_naem, gender, hire_date
 	connection.query(`SELECT * FROM EMPLOYEES LIMIT 20 OFFSET ${page}`,
 		(error, results, fields) => {
 			if (error) throw error;
 			res.send(results);
 	});
-	connection.end();
 });
 
 app.get("/payrolltest/:page", (req, res) => {
@@ -69,9 +64,8 @@ app.get("/payrolltest/:page", (req, res) => {
 		LIMIT 20 OFFSET ${page}`,
 		(error, results, fields) => {
 			if (error) throw error;
-			res.send(results);
+			res.json(results);
 	});
-
 });
 
 function keepAlive(){

@@ -19,7 +19,7 @@ class TestPayrollPage extends Component {
 	}
 
 	getResults = _ => {
-		let url = `http://localhost:3000/payrolltest/${this.state.page}`;
+		let url = `${this.state.page}`;
 		fetch(url)
 			.then(response => response.json())
 			//.then(response => response.text())
