@@ -8,6 +8,8 @@ import Departments from './pages/departmentPage';
 import About from './pages/about';
 import CallbackPage from "./pages/callback";
 import Auth from "./components/Auth";
+import TestEmployeePage from "./pages/testemployees";
+import TestPayrollPage from "./pages/testpayroll";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
               <Route path="/departments" component={Departments}/>
               <Route path="/about" component={About}/>
               <Route path="/callback" component={CallbackPage}/>
+              <Route path="/employeestest/:page" component={TestEmployeePage}/>
+              <Route path="/payrolltest/:page" component={TestPayrollPage}/>
             </Switch>
           </Router>
         </div>
