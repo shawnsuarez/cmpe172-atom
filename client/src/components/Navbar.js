@@ -13,15 +13,36 @@ class Navbar extends Component {
         {({ user }) => (
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">Dashboard<span className="sr-only">(current)</span></Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/departments">Departments</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/about">About</Link>
-              </li>
+              {
+                window.location.href.indexOf("dashboard") > -1 ?
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/dashboard" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>Dashboard</Link>
+                </li>
+                :
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                </li>
+              }
+              {
+                window.location.href.indexOf("departments") > -1 ?
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/departments" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>Departments</Link>
+                </li>
+                :
+                <li className="nav-item">
+                  <Link className="nav-link" to="/departments">Departments</Link>
+                </li>
+              }
+              {
+                window.location.href == "http://localhost:3000/about" ?
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/about" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>About</Link>
+                </li>
+                :
+                <li className="nav-item">
+                  <Link className="nav-link" to="/about">About</Link>
+                </li>
+              }
             </ul>
             <h3 style={{margin:"0 2em"}}>{user.role}</h3>
             <form className="form-inline">
