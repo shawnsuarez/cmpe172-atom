@@ -41,7 +41,27 @@ class EmployeeEditButton extends React.Component {
             Email:
             <input type="text" name="email" placeholder={this.props.emp.email} className="form-control" style={{margin: "0 0"}}/>
           </div>
-          
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Email:
+            <input type="text" name="hireDate" placeholder={this.props.emp.hireDate} className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Email:
+            <input type="text" name="salary" placeholder={this.props.emp.salary} className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Email:
+            <input type="text" name="to" placeholder={this.props.emp.to} className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Email:
+            <input type="text" name="from" placeholder={this.props.emp.from} className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
           <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
        </form>
 
@@ -58,6 +78,7 @@ class EmployeeEditButton extends React.Component {
                 title = {"Edit: "+String(this.props.emp.firstName + " " + this.props.emp.lastName)}
                 text = {editForm}
                 close = {this.closeEditModal}
+                style={{height:"1500px"}}
               />
             )
             :

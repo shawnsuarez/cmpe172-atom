@@ -12,17 +12,17 @@ export default class EmployeeTable extends React.Component {
     this.state = {
       showEditModal: false,
     }
-    this.openEditModal = this.openEditModal.bind(this);
-    this.closeEditModal = this.closeEditModal.bind(this);
+    this.openAddEmployeeModal = this.openAddEmployeeModal.bind(this);
+    this.closeAddEmployeeModal = this.closeAddEmployeeModal.bind(this);
   }
 
-  openEditModal(){
+  openAddEmployeeModal(){
     this.setState({
       showEditModal: true,
     });
   }
 
-  closeEditModal(){
+  closeAddEmployeeModal(){
     this.setState({
       showEditModal: false,
     })
@@ -33,13 +33,25 @@ export default class EmployeeTable extends React.Component {
       <AuthConsumer>
         {({user}) => (
           <div>
-            <h2>Employees</h2>
+            <div>
+              <h2>
+                Employees
+                <button className="btn btn-light" style={{float:"right", border:"2px solid #333"}}>
+                  + Add Employee
+                </button>
+              </h2>
+
+            </div>
             <table className="table">
               <thead>
                 <tr>
                   <th scope="col">id</th>
                   <th scope="col">Name</th>
                   <th scope="col">email</th>
+                  <th scope="col">Hire Date</th>
+                  <th scope="col">Salary</th>
+                  <th scope="col">To</th>
+                  <th scope="col">From</th>
                   <Can
                     role={user.role}
                     perform="employee:edit"
@@ -63,6 +75,10 @@ export default class EmployeeTable extends React.Component {
                         <th scope="row">{index + 1}</th>
                         <td>{employee.firstName +" "+ employee.lastName}</td>
                         <td>{employee.email}</td>
+                        <td>{employee.hireDate}</td>
+                        <td>{employee.salary}</td>
+                        <td>{employee.to}</td>
+                        <td>{employee.from}</td>
                         <td>
                           <Can
                             role={user.role}

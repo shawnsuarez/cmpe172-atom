@@ -12,7 +12,7 @@ html, body, .app {
 .popup {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 1200px;
   top: 0;
   left: 0;
   right: 0;
