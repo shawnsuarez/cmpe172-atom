@@ -78,9 +78,15 @@ export default class EmployeeTable extends React.Component {
             <div>
               <h2>
                 Employees
-                <button className="btn btn-light" style={{float:"right", border:"2px solid #333"}} onClick={this.openAddEmployeeModal}>
-                  + Add Employee
-                </button>
+                <Can
+                  role={user.role}
+                  perform="employee:delete"
+                  yes={() => (
+                    <button className="btn btn-light" style={{float:"right", border:"2px solid #333"}} onClick={this.openAddEmployeeModal}>
+                      + Add Employee
+                    </button>
+                  )}
+                />
                 {
                   this.state.showAddModal ?
                   <Popup
@@ -100,10 +106,35 @@ export default class EmployeeTable extends React.Component {
                   <th scope="col">id</th>
                   <th scope="col">Name</th>
                   <th scope="col">email</th>
-                  <th scope="col">Hire Date</th>
-                  <th scope="col">Salary</th>
-                  <th scope="col">From</th>
-                  <th scope="col">To</th>
+                  <Can
+                    role={user.role}
+                    perform="employee:edit"
+                    yes={() => (
+                      <th scope="col">Hire Date</th>
+                    )}
+                  />
+                  <Can
+                    role={user.role}
+                    perform="employee:edit"
+                    yes={() => (
+                      <th scope="col">Salary</th>
+                    )}
+                  />
+                  <Can
+                    role={user.role}
+                    perform="employee:edit"
+                    yes={() => (
+                      <th scope="col">From</th>
+                    )}
+                  />
+                  <Can
+                    role={user.role}
+                    perform="employee:edit"
+                    yes={() => (
+                      <th scope="col">To</th>
+                    )}
+                  />
+
                   <Can
                     role={user.role}
                     perform="employee:edit"
@@ -127,10 +158,42 @@ export default class EmployeeTable extends React.Component {
                         <th scope="row">{index + 1}</th>
                         <td>{employee.firstName +" "+ employee.lastName}</td>
                         <td>{employee.email}</td>
-                        <td>{employee.hireDate}</td>
-                        <td>{employee.salary}</td>
-                        <td>{employee.from}</td>
-                        <td>{employee.to}</td>
+                        <td>
+                          <Can
+                            role={user.role}
+                            perform="employee:edit"
+                            yes={() => (
+                              employee.hireDate
+                            )}
+                          />
+                        </td>
+                        <td>
+                          <Can
+                            role={user.role}
+                            perform="employee:edit"
+                            yes={() => (
+                              employee.salary
+                            )}
+                          />
+                        </td>
+                        <td>
+                          <Can
+                            role={user.role}
+                            perform="employee:edit"
+                            yes={() => (
+                              employee.from
+                            )}
+                          />
+                        </td>
+                        <td>
+                          <Can
+                            role={user.role}
+                            perform="employee:edit"
+                            yes={() => (
+                              employee.to
+                            )}
+                          />
+                        </td>
                         <td>
                           <Can
                             role={user.role}
