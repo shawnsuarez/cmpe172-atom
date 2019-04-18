@@ -1,6 +1,5 @@
 import React from 'react';
 import Popup from './Popup';
-import Can from './Can';
 
 class EmployeeEditButton extends React.Component {
   constructor(){
@@ -43,22 +42,22 @@ class EmployeeEditButton extends React.Component {
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
-            Email:
+            Hire Date:
             <input type="text" name="hireDate" placeholder={this.props.emp.hireDate} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
-            Email:
+            Salary:
             <input type="text" name="salary" placeholder={this.props.emp.salary} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
-            Email:
+            To:
             <input type="text" name="to" placeholder={this.props.emp.to} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
-            Email:
+            From:
             <input type="text" name="from" placeholder={this.props.emp.from} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
@@ -78,7 +77,6 @@ class EmployeeEditButton extends React.Component {
                 title = {"Edit: "+String(this.props.emp.firstName + " " + this.props.emp.lastName)}
                 text = {editForm}
                 close = {this.closeEditModal}
-                style={{height:"1500px"}}
               />
             )
             :

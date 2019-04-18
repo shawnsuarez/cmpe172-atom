@@ -4,13 +4,14 @@ import {AuthConsumer} from '../authContext';
 import Can from './Can';
 import Popup from './Popup';
 import EmployeeEditButton from './EmployeeEditButton';
+import EmployeeDeleteButton from './EmployeeDeleteButton';
 import employees from '../employees';
 
 export default class EmployeeTable extends React.Component {
   constructor(){
     super();
     this.state = {
-      showEditModal: false,
+      showAddModal: false,
     }
     this.openAddEmployeeModal = this.openAddEmployeeModal.bind(this);
     this.closeAddEmployeeModal = this.closeAddEmployeeModal.bind(this);
@@ -18,17 +19,58 @@ export default class EmployeeTable extends React.Component {
 
   openAddEmployeeModal(){
     this.setState({
-      showEditModal: true,
+      showAddModal: true,
     });
   }
 
   closeAddEmployeeModal(){
     this.setState({
-      showEditModal: false,
+      showAddModal: false,
     })
   }
 
   render(){
+    var addEmployeeForm = (
+      <form style={{fontSize: '16px', fontWeight: '400'}}>
+          <div className="form-group" style={{margin:"1em 0"}}>
+            First name:
+            <input type="text" name="firstName" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Last name:
+            <input type="text" name="lastName" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Email:
+            <input type="text" name="email" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Hire Date:
+            <input type="text" name="hireDate" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            Salary:
+            <input type="text" name="salary" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            From:
+            <input type="text" name="from" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <div className="form-group" style={{margin:"1em 0"}}>
+            To:
+            <input type="text" name="to" className="form-control" style={{margin: "0 0"}}/>
+          </div>
+
+          <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
+       </form>
+     );
+
     return(
       <AuthConsumer>
         {({user}) => (
@@ -36,9 +78,19 @@ export default class EmployeeTable extends React.Component {
             <div>
               <h2>
                 Employees
-                <button className="btn btn-light" style={{float:"right", border:"2px solid #333"}}>
+                <button className="btn btn-light" style={{float:"right", border:"2px solid #333"}} onClick={this.openAddEmployeeModal}>
                   + Add Employee
                 </button>
+                {
+                  this.state.showAddModal ?
+                  <Popup
+                    title="Add New Employee"
+                    text={addEmployeeForm}
+                    close={this.closeAddEmployeeModal}
+                  />
+                  :
+                  null
+                }
               </h2>
 
             </div>
@@ -50,8 +102,8 @@ export default class EmployeeTable extends React.Component {
                   <th scope="col">email</th>
                   <th scope="col">Hire Date</th>
                   <th scope="col">Salary</th>
-                  <th scope="col">To</th>
                   <th scope="col">From</th>
+                  <th scope="col">To</th>
                   <Can
                     role={user.role}
                     perform="employee:edit"
@@ -77,8 +129,8 @@ export default class EmployeeTable extends React.Component {
                         <td>{employee.email}</td>
                         <td>{employee.hireDate}</td>
                         <td>{employee.salary}</td>
-                        <td>{employee.to}</td>
                         <td>{employee.from}</td>
+                        <td>{employee.to}</td>
                         <td>
                           <Can
                             role={user.role}
@@ -93,9 +145,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:delete"
                             yes={() => (
-                              <button className="btn btn-sm btn-danger">
-                                Delete
-                              </button>
+                              <EmployeeDeleteButton emp={employee}/>
                             )}
                           />
                         </td>
