@@ -19,7 +19,7 @@ class TestPayrollPage extends Component {
 	}
 
 	getResults = _ => {
-		let url = `${this.state.page}`;
+		let url = window.location.href;
 		fetch(url)
 			.then(response => response.json())
 			//.then(response => response.text())
@@ -37,6 +37,7 @@ class TestPayrollPage extends Component {
 						<tr>
 							<th scope="col">#</th>
 		              		<th scope="col">Name</th>
+		              		<th scope="col">Title</th>
 		              		<th scope="col">Salary</th>
 		              		<th scope="col">From</th>
 		              		<th scope="col">To</th>
@@ -47,6 +48,7 @@ class TestPayrollPage extends Component {
 							<tr key={employee.emp_no}>
 								<td>{employee.emp_no}</td>
 								<td>{employee.first_name} {employee.last_name}</td>
+								<td>{employee.title}</td>
 								<td>{employee.salary}</td>
 								<td>{employee.from_date.substring(0, 10)}</td>
 								<td>{employee.to_date.substring(0, 10)}</td>

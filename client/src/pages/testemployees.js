@@ -19,13 +19,28 @@ class TestEmployeePage extends Component {
 	}
 
 	getResults = _ => {
-		let url = `${this.state.page}`;
-		fetch(url)
+		let url = window.location.href;
+		fetch(url, { method: "GET" })
 			.then(response => response.json())
 			//.then(response => response.text())
 			//.then(text => console.log(text))
 			.then(employees => this.setState({employees}))
 			.catch(error => console.log(error));
+		/*fetch(url)
+			.then(response => {
+				const contentType = response.headers.get("content-type");
+				if (contentType && contentType.indexOf("application/json") !== -1) {
+					return response.json().then(employees => {
+					// process your JSON data further
+						this.setState({employees});
+					});
+				} else {
+					return response.text().then(text => {
+					// this is text, do something with it
+						console.log(text);
+					});
+				}
+			});*/
 	}
 
 	render() {
@@ -37,6 +52,8 @@ class TestEmployeePage extends Component {
 						<tr>
 							<th scope="col">#</th>
 		              		<th scope="col">Name</th>
+		              		<th scope="col">Title</th>
+		              		<th scope="col">Email</th>
 	              		</tr>
 					</thead>
 					<tbody>
@@ -44,6 +61,8 @@ class TestEmployeePage extends Component {
 							<tr key={employee.emp_no}>
 								<td>{employee.emp_no}</td>
 								<td>{employee.first_name} {employee.last_name}</td>
+								<td>{employee.title}</td>
+								<td>{employee.first_name.toLowerCase() + employee.last_name.toLowerCase()}@atompayroll.com</td>
 							</tr>
 						)}
 					</tbody>

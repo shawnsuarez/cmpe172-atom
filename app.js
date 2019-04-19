@@ -1,9 +1,10 @@
 const express = require('express');
+const router = express.Router({ mergeParams: true });
 const app = express();
 const bodyParser = require('body-parser');
 const path = require("path");
 const cors = require('cors');
-const mysql = require("mysql");
+const methodOverride = require("method-override");
 const PORT = process.env.PORT || 8080;
 
 app.use(function(req, res, next) {
@@ -13,69 +14,44 @@ app.use(function(req, res, next) {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 // Static file declaration
 app.use("/static", express.static(path.join(__dirname, 'client/build')));
 
-const connection = mysql.createConnection({
-	host: 'atompayroll.mysql.database.azure.com',
-	user: 'atompayroll@atompayroll',
-	password: 'Cmpe172!',
-	database: 'employees',
-	port: 3306
-});
-
-connection.connect(err => {
-	(err) ? console.log(err) : console.log("Connected to MySQL");
-});
-
 // production mode
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get('*', (req, res) => {
+  app.get('/', (req, res) => {
     res.sendfile(path.join(__dirname = 'client/build/index.html'));
   })
 };
 
 // build mode
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname+'/client/public/index.html'));
+});*/
+
+/*app.use(function(req, res, next) {
+  if (req.method === 'GET' && req.accepts('html') && !req.is('json') && !req.path.includes('.')) {
+    res.sendFile('index.html', { root })
+  } else next()
+})*/
+
+const root = require('path').join(__dirname, 'client', 'public')
+app.use(express.static(root));
+app.get("/", (req, res) => {
+    res.sendFile('index.html', { root });
 });
 
-app.get("/employeestest/:page" , (req, res) => {
-	let page = parseInt(req.params.page) * 20;
-	// LIMIT # OFFSET = PAGE # * EMPLOYEES/PAGE
-	// Returns emp_no, first_name, last_naem, gender, hire_date
-	connection.query(`SELECT * FROM EMPLOYEES LIMIT 20 OFFSET ${page}`,
-		(error, results, fields) => {
-			if (error) throw error;
-			res.send(results);
-	});
-});
+const employeeRoutes = require("./routes/employeeRoutes");
+const payrollRoutes = require("./routes/payrollRoutes");
+const departmentRoutes = require("./routes/departmentRoutes");
 
-app.get("/payrolltest/:page", (req, res) => {
-	let page = parseInt(req.params.page) * 20;
-
-	connection.query(
-		`SELECT e.emp_no, first_name, last_name, salary, from_date, to_date 
-		FROM EMPLOYEES e 
-		INNER JOIN (SELECT * FROM SALARIES s GROUP BY s.emp_no) AS Sal 
-		ON e.emp_no = Sal.emp_no 
-		LIMIT 20 OFFSET ${page}`,
-		(error, results, fields) => {
-			if (error) throw error;
-			res.json(results);
-	});
-});
-
-function keepAlive(){
-	connection.query( "SELECT 1", function(err, rows) {
-		if (err) {
-			console.log("QUERY ERROR: " + err);
-		}
-	});
-}
-setInterval(keepAlive, 30000);
+app.use("/employeestest", employeeRoutes);
+app.use("/payrolltest", payrollRoutes);
+app.use("/departments", departmentRoutes);
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
