@@ -25,6 +25,7 @@ class EmployeeEditButton extends React.Component {
 
   render(){
     var editForm = (
+      {/*
       <form>
           <div className="form-group" style={{margin:"1em 0"}}>
             First name:
@@ -63,6 +64,67 @@ class EmployeeEditButton extends React.Component {
 
           <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
        </form>
+      */},
+      <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder={this.props.emp.firstName} />
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder={this.props.emp.lastName}/>
+          </div>
+        </div>
+        <div class="form-group" style={{margin:"-14px 0 0 0"}}>
+          <input type="email" class="form-control" id="email" placeholder={this.props.emp.email}/>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
+            <input type="date" class="form-control" name="hireDare" />
+          </div>
+        </div>
+        <div class="input-group mb-3" style={{margin:"0 0 0 14px"}}>
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input type="number" class="form-control" min="1" step="100" style={{margin:"0 0 0 0"}} placeholder={this.props.emp.salary}/>
+        </div>
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 18px"}}>From:</label>
+            <input type="date" class="form-control" name="from"/>
+          </div>
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 16px"}}>To:</label>
+            <input type="date" class="form-control" name="to"/>
+          </div>
+        </div>
+        <div class="form-row" >
+          <div class="form-group col-md-5">
+            <label style={{margin:"0 0 0 18px"}}>Employee Title:</label>
+            <input type="text" class="form-control" name="empTitle" placeholder={this.props.emp.empTitle}/>
+          </div>
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 16px"}}>Employee ID:</label>
+            <input type="number" class="form-control" name="empID" placeholder={this.props.emp.empID}/>
+          </div>
+          <div class="form-group col-md-3">
+            <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
+            <select class="form-control" style={{margin:"1em 0 0 1em"}} placeholder={this.props.emp.deptNum}>
+              <option>d001</option>
+              <option>d002</option>
+              <option>d003</option>
+              <option>d004</option>
+              <option>d005</option>
+              <option>d006</option>
+              <option>d007</option>
+              <option>d008</option>
+              <option>d009</option>
+            </select>
+          </div>
+        </div>
+        <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
+      </form>
 
     )
     return(

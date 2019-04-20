@@ -43,8 +43,11 @@ export default class EmployeeTable extends React.Component {
         <div class="form-group" style={{margin:"-14px 0 0 0"}}>
           <input type="email" class="form-control" id="email" placeholder="email"/>
         </div>
-        <div class="form-group" style={{margin:"20px 0"}}>
-          <input type="number" class="form-control" min="1" step="100" placeholder="Salary"/>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
+            <input type="date" class="form-control" name="hireDare" />
+          </div>
         </div>
         <div class="input-group mb-3" style={{margin:"0 0 0 14px"}}>
           <div class="input-group-prepend">
@@ -74,11 +77,15 @@ export default class EmployeeTable extends React.Component {
           <div class="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
             <select class="form-control" style={{margin:"1em 0 0 1em"}}>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option>d001</option>
+              <option>d002</option>
+              <option>d003</option>
+              <option>d004</option>
+              <option>d005</option>
+              <option>d006</option>
+              <option>d007</option>
+              <option>d008</option>
+              <option>d009</option>
             </select>
           </div>
         </div>
