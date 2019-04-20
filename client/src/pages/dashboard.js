@@ -16,8 +16,18 @@ const DashboardPage = () => (
           <div>
             <Navbar user={user}/>
             <div style={{padding:"1em"}}>
-              <h1>Dashboard</h1>
-              <EmployeeTable />
+              <div>
+                <EmployeeTable />
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  </ul>
+                </nav>
+              </div>
             </div>
           </div>
         )}
