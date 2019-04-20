@@ -31,44 +31,60 @@ export default class EmployeeTable extends React.Component {
 
   render(){
     var addEmployeeForm = (
-      <form style={{fontSize: '16px', fontWeight: '400'}}>
-          <div className="form-group" style={{margin:"1em 0"}}>
-            First name:
-            <input type="text" name="firstName" className="form-control" style={{margin: "0 0"}}/>
+      <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First name" />
           </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Last name:
-            <input type="text" name="lastName" className="form-control" style={{margin: "0 0"}}/>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" />
           </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Email:
-            <input type="text" name="email" className="form-control" style={{margin: "0 0"}}/>
+        </div>
+        <div class="form-group" style={{margin:"-14px 0 0 0"}}>
+          <input type="email" class="form-control" id="email" placeholder="email"/>
+        </div>
+        <div class="form-group" style={{margin:"20px 0"}}>
+          <input type="number" class="form-control" min="1" step="100" placeholder="Salary"/>
+        </div>
+        <div class="input-group mb-3" style={{margin:"0 0 0 14px"}}>
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
           </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Hire Date:
-            <input type="text" name="hireDate" className="form-control" style={{margin: "0 0"}}/>
+          <input type="number" class="form-control" min="1" step="100" style={{margin:"0 0 0 0"}} placeholder="Salary"/>
+        </div>
+        <div class="form-row" >
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 18px"}}>From:</label>
+            <input type="date" class="form-control" name="from"/>
           </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Salary:
-            <input type="text" name="salary" className="form-control" style={{margin: "0 0"}}/>
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 16px"}}>To:</label>
+            <input type="date" class="form-control" name="to"/>
           </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            From:
-            <input type="text" name="from" className="form-control" style={{margin: "0 0"}}/>
+        </div>
+        <div class="form-row" >
+          <div class="form-group col-md-5">
+            <label style={{margin:"0 0 0 18px"}}>Employee Title:</label>
+            <input type="text" class="form-control" name="empTitle"/>
           </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            To:
-            <input type="text" name="to" className="form-control" style={{margin: "0 0"}}/>
+          <div class="form-group col-md-4">
+            <label style={{margin:"0 0 0 16px"}}>Employee ID:</label>
+            <input type="number" class="form-control" name="empID"/>
           </div>
+          <div class="form-group col-md-3">
+            <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
+            <select class="form-control" style={{margin:"1em 0 0 1em"}}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+        <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Create</button>
+      </form>
 
-          <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
-       </form>
      );
 
     return(
