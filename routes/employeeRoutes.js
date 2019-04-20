@@ -5,7 +5,10 @@ const connection = require("../connection.js");
 // Show employees with pagination
 router.get("/:page" , async (req, res) => {
 	let empPerPage = 25;
-	let page = parseInt(req.params.page) * empPerPage;
+	let page = (parseInt(req.params.page) - 1) * empPerPage;
+	if (page < 0)
+		page = 0;
+
 	// LIMIT # OFFSET = PAGE # * EMPLOYEES/PAGE
 	// Returns emp_no, first_name, last_naem, gender, hire_date
 	await connection.query(
@@ -53,9 +56,10 @@ router.get("/:emp_id/edit", (req, res) => {
 });
 
 // Delete employee
-router.get("/:emp_id/delete", (req, res) => {
+router.post("/delete", (req, res) => {
+	let empNo = req.body.emp_no;
 	connection.query(
-	`DELETE FROM EMPLOYEES WHERE emp_no = ${req.params.emp_id}`,
+	`DELETE FROM EMPLOYEES WHERE emp_no = ${empNo}`,
 	(error, results, fields) => {
 		if (error) throw error;
 		res.send(JSON.stringify(results));

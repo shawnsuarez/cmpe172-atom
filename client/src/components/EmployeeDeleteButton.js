@@ -23,17 +23,34 @@ class EmployeeDeleteButton extends React.Component{
     })
   }
 
+  handleDelete(emp_no) {
+    this.closeDeleteModal();
+    let data = { emp_no : emp_no }
+    let url = "./delete";
+    fetch(url, { method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data) })
+    .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        } return response.json()
+    }).catch(function(err) {
+        console.log(err)
+    });
+    window.location.reload();
+  }
+
   render(){
     var empInfo = (
       <div>
-        <ul class="list-group" style={{margin:"1em 0"}}>
-          <li class="list-group-item"> <b>Name:</b> {this.props.emp.firstName + " " + this.props.emp.lastName}</li>
-          <li class="list-group-item"> <b>email:</b> {this.props.emp.email}</li>
-          <li class="list-group-item"> <b>Hire Date:</b> {this.props.emp.hireDate}</li>
-          <li class="list-group-item"> <b>Salary:</b> {this.props.emp.salary}</li>
-          <li class="list-group-item"> <b>From - To:</b> {this.props.emp.from + " " + this.props.emp.to}</li>
+        <ul className="list-group" style={{margin:"1em 0"}}>
+          <li className="list-group-item"> <b>Name:</b> {this.props.emp.first_name + " " + this.props.emp.last_name}</li>
+          <li className="list-group-item"> <b>email:</b> {this.props.emp.email}</li>
+          <li className="list-group-item"> <b>Hire Date:</b> {this.props.emp.hire_date}</li>
+          <li className="list-group-item"> <b>Salary:</b> {this.props.emp.salary}</li>
+          <li className="list-group-item"> <b>From - To:</b> {this.props.emp.from_date.substring(0,10) + " " + this.props.emp.to_date.substring(0,10)}</li>
         </ul>
-        <button className="btn btn-danger" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Delete</button>
+        <button className="btn btn-danger" onClick={() => this.handleDelete(this.props.emp.emp_no)} style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Delete</button>
       </div>
     );
 
@@ -45,7 +62,7 @@ class EmployeeDeleteButton extends React.Component{
         {
           this.state.showDeleteModal ?
           <Popup
-            title = {"Delete "+String(this.props.emp.firstName + " " + this.props.emp.lastName)+"?"}
+            title = {"Delete "+String(this.props.emp.first_name + " " + this.props.emp.last_name)+"?"}
             text = {empInfo}
             close = {this.closeDeleteModal}
           />

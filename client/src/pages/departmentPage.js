@@ -25,17 +25,17 @@ class DepartmentPage extends React.Component {
                 <div>
                   <Navbar/>
                   <div style={{padding:"1em"}}>
-                    <div class="dropdown">
+                    <div className="dropdown">
                       <h2 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.currentDept + " ↓"}
                       </h2>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li>
                           {
                             this.state.currentDept === "Marketing" ?
-                            <a class="dropdown-item active" href="#">Marketing</a>
+                            <a className="dropdown-item active" href="#">Marketing</a>
                             :
-                            <a class="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
                                 currentDept:"Marketing"
                               })
@@ -45,9 +45,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Accounting" ?
-                            <a class="dropdown-item active" href="#">Accounting</a>
+                            <a className="dropdown-item active" href="#">Accounting</a>
                             :
-                            <a class="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
                                 currentDept:"Accounting"
                               })
@@ -57,9 +57,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Research & Development" ?
-                            <a class="dropdown-item active" href="#">Research & Development</a>
+                            <a className="dropdown-item active" href="#">Research & Development</a>
                             :
-                            <a class="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
                                 currentDept:"Research & Development"
                               })
@@ -69,9 +69,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Human Resources" ?
-                            <a class="dropdown-item active" href="#">Human Resources</a>
+                            <a className="dropdown-item active" href="#">Human Resources</a>
                             :
-                            <a class="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
                                 currentDept:"Human Resources"
                               })
@@ -81,9 +81,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Purchasing" ?
-                            <a class="dropdown-item active" href="#">Purchasing</a>
+                            <a className="dropdown-item active" href="#">Purchasing</a>
                             :
-                            <a class="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
                                 currentDept:"Purchasing"
                               })

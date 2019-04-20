@@ -4,7 +4,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require("path");
 const cors = require('cors');
-const methodOverride = require("method-override");
 const PORT = process.env.PORT || 8080;
 
 app.use(function(req, res, next) {
@@ -15,7 +14,6 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
 
 // Static file declaration
 app.use("/static", express.static(path.join(__dirname, 'client/build')));

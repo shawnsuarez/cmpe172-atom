@@ -28,12 +28,12 @@ class EmployeeEditButton extends React.Component {
       <form>
           <div className="form-group" style={{margin:"1em 0"}}>
             First name:
-            <input type="text" name="firstName" placeholder={this.props.emp.firstName} className="form-control" style={{margin: "0 0"}}/>
+            <input type="text" name="first_name" placeholder={this.props.emp.first_name} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
             Last name:
-            <input type="text" name="lastName" placeholder={this.props.emp.lastName} className="form-control" style={{margin: "0 0"}}/>
+            <input type="text" name="last_name" placeholder={this.props.emp.last_name} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
@@ -43,7 +43,7 @@ class EmployeeEditButton extends React.Component {
 
           <div className="form-group" style={{margin:"1em 0"}}>
             Hire Date:
-            <input type="text" name="hireDate" placeholder={this.props.emp.hireDate} className="form-control" style={{margin: "0 0"}}/>
+            <input type="text" name="hire_date" placeholder={this.props.emp.hire_date} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
@@ -52,13 +52,13 @@ class EmployeeEditButton extends React.Component {
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
-            To:
-            <input type="text" name="to" placeholder={this.props.emp.to} className="form-control" style={{margin: "0 0"}}/>
+            From:
+            <input type="text" name="from_date" placeholder={this.props.emp.from_date} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <div className="form-group" style={{margin:"1em 0"}}>
-            From:
-            <input type="text" name="from" placeholder={this.props.emp.from} className="form-control" style={{margin: "0 0"}}/>
+            To:
+            <input type="text" name="to_date" placeholder={this.props.emp.to_date} className="form-control" style={{margin: "0 0"}}/>
           </div>
 
           <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
@@ -74,7 +74,7 @@ class EmployeeEditButton extends React.Component {
           this.state.showEditModal ?
             (
               <Popup
-                title = {"Edit: "+String(this.props.emp.firstName + " " + this.props.emp.lastName)}
+                title = {"Edit: "+String(this.props.emp.first_name + " " + this.props.emp.last_name)}
                 text = {editForm}
                 close = {this.closeEditModal}
               />

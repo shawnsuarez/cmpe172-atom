@@ -5,7 +5,8 @@ class TestEmployeePage extends Component {
 		super(props);
 
 		this.state = {
-			page: this.props.match.params.page,
+			page: parseInt(this.props.match.params.page),
+			maxPage: 5,
 			employees: []
 		}
 	}
@@ -43,7 +44,28 @@ class TestEmployeePage extends Component {
 			});*/
 	}
 
+	handleDelete(emp_no) {
+		let data = { emp_no : emp_no }
+		let url = "./delete";
+
+		fetch(url, { 
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(data) })
+		.then((response) => {
+			if (response.status >= 400) {
+				throw new Error("Bad response from server");
+			} 
+			return response.json()
+		}).catch(function(err) {
+			console.log(err)
+		});
+		window.location.reload();
+	}
+
 	render() {
+		let prevPage = this.state.page > 1 ? this.state.page - 1 : 1;
+    	let nextPage = this.state.page < this.state.maxPage ? this.state.page + 1 : this.state.maxPage;
 		return (
 			<div>
 				<h1>TestEmployeePage</h1>
@@ -63,10 +85,21 @@ class TestEmployeePage extends Component {
 								<td>{employee.first_name} {employee.last_name}</td>
 								<td>{employee.title}</td>
 								<td>{employee.first_name.toLowerCase() + employee.last_name.toLowerCase()}@atompayroll.com</td>
+								<td><button className="btn btn-danger" onClick={() => this.handleDelete(employee.emp_no)}>Delete</button></td>
 							</tr>
 						)}
 					</tbody>
 				</table>
+				<nav aria-label="Page navigation example">
+                  <ul className="pagination justify-content-center">
+                    <li className="page-item"><a className="page-link" href={"/employeestest/" + prevPage}>Previous</a></li>
+                        <li className="page-item"><a className="page-link" href="/employeestest/1">1</a></li>
+                        <li className="page-item"><a className="page-link" href="/employeestest/2">2</a></li>
+                        <li className="page-item"><a className="page-link" href="/employeestest/3">3</a></li>
+                        <li className="page-item"><a className="page-link" href={"/employeestest/" + nextPage}>Next</a></li>
+                  </ul>
+                </nav>
+                <button className="btn btn-danger" onClick={() => this.handleDelete("10005")}>Delete</button>
 			</div>
 		);
 	}
