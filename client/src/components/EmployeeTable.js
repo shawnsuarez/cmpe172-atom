@@ -5,16 +5,21 @@ import Can from './Can';
 import Popup from './Popup';
 import EmployeeEditButton from './EmployeeEditButton';
 import EmployeeDeleteButton from './EmployeeDeleteButton';
-import employees from '../employees';
+//import employees from '../employees';
 
 export default class EmployeeTable extends React.Component {
   constructor(){
     super();
     this.state = {
       showAddModal: false,
+      employees: []
     }
     this.openAddEmployeeModal = this.openAddEmployeeModal.bind(this);
     this.closeAddEmployeeModal = this.closeAddEmployeeModal.bind(this);
+  }
+
+  componentDidMount(){
+	this.getResults();
   }
 
   openAddEmployeeModal(){
@@ -28,6 +33,16 @@ export default class EmployeeTable extends React.Component {
       showAddModal: false,
     })
   }
+
+	getResults = _ => {
+		let url = window.location.href;
+		fetch(url, { method: "GET" })
+			.then(response => response.json())
+			//.then(response => response.text())
+			//.then(text => console.log(text))
+			.then(employees => this.setState({showAddModal: false,employees}))
+			.catch(error => console.log(error));
+	}
 
   render(){
     var addEmployeeForm = (
@@ -169,17 +184,20 @@ export default class EmployeeTable extends React.Component {
               </thead>
                 <tbody>
                   {
-                    employees.map((employee, index) => (
-                      <tr key={employee.id}>
-                        <th scope="row">{index + 1}</th>
-                        <td>{employee.firstName +" "+ employee.lastName}</td>
-                        <td>{employee.email}</td>
+                    this.state.employees.map((employee, index) => (
+                      <tr key={employee.emp_no}>
+                        <td>{employee.emp_no}</td>
+                        <td>{employee.first_name +" "+ employee.last_name}</td>
+                        <td>
+                        	{employee.email == null ? employee.first_name.toLowerCase() 
+                        	+ employee.last_name.toLowerCase() + "@atompayroll.com" : null}
+                        </td>
                         <td>
                           <Can
                             role={user.role}
                             perform="employee:edit"
                             yes={() => (
-                              employee.hireDate
+                              employee.hire_date.substring(0,10)
                             )}
                           />
                         </td>
@@ -197,7 +215,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:edit"
                             yes={() => (
-                              employee.from
+                              employee.from_date.substring(0,10)
                             )}
                           />
                         </td>
@@ -206,7 +224,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:edit"
                             yes={() => (
-                              employee.to
+                              employee.to_date.substring(0,10)
                             )}
                           />
                         </td>

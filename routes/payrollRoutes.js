@@ -7,7 +7,7 @@ router.get("/:page", async (req, res) => {
 	let page = parseInt(req.params.page) * empPerPage;
 
 	await connection.query(
-		`SELECT e.emp_no, first_name, last_name, title, salary, Sal.from_date, Sal.to_date 
+		`SELECT e.emp_no, e.first_name, e.last_name, title, hire_date, salary, Sal.from_date, Sal.to_date 
 		FROM EMPLOYEES e 
 		INNER JOIN (SELECT * FROM SALARIES s GROUP BY s.emp_no) AS Sal 
 		ON e.emp_no = Sal.emp_no 

@@ -19,7 +19,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={HomePage}/>
-              <Route path="/dashboard" component={DashboardPage}/>
+              <Route path="/dashboard/:page" component={DashboardPage}/>
               <Route path="/departments" component={Departments}/>
               <Route path="/about" component={About}/>
               <Route path="/callback" component={CallbackPage}/>

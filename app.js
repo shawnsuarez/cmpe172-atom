@@ -50,6 +50,7 @@ const payrollRoutes = require("./routes/payrollRoutes");
 const departmentRoutes = require("./routes/departmentRoutes");
 
 app.use("/employeestest", employeeRoutes);
+app.use("/dashboard", payrollRoutes);
 app.use("/payrolltest", payrollRoutes);
 app.use("/departments", departmentRoutes);
 
