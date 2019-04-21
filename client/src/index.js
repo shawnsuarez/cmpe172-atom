@@ -23,7 +23,7 @@ function App() {
               <Route path="/departments" component={Departments}/>
               <Route path="/about" component={About}/>
               <Route path="/callback" component={CallbackPage}/>
-              <Route path="/employeestest/:page" component={TestEmployeePage}/>
+              <Route path="/employeestest" component={TestEmployeePage}/>
               <Route path="/payrolltest/:page" component={TestPayrollPage}/>
             </Switch>
           </Router>
