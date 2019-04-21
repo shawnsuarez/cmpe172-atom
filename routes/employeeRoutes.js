@@ -20,7 +20,7 @@ router.get("/:page" , async (req, res) => {
 		(error, results, fields) => {
 			if (error) throw error;
 			//res.send(results);
-			res.send(JSON.stringify(results));
+			res.json(results);
 	});
 });
 

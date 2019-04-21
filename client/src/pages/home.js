@@ -9,7 +9,7 @@ const HomePage = () => (
   <AuthConsumer style={{height:"100%", margin:0, padding:0}}>
     {({ authenticated }) =>
       authenticated ? (
-        <Redirect to="/dashboard/1" />
+        <Redirect to="/dashboard" />
       ) : (
         <div style={LandingPageStyle}>
           <ParticlesComponent/>

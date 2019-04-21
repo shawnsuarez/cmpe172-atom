@@ -45,8 +45,8 @@ class EmployeeDeleteButton extends React.Component{
       <div>
         <ul className="list-group" style={{margin:"1em 0"}}>
           <li className="list-group-item"> <b>Name:</b> {this.props.emp.first_name + " " + this.props.emp.last_name}</li>
-          <li className="list-group-item"> <b>email:</b> {this.props.emp.email}</li>
-          <li className="list-group-item"> <b>Hire Date:</b> {this.props.emp.hire_date}</li>
+          <li className="list-group-item"> <b>email:</b> {this.props.emp.first_name.toLowerCase() + this.props.emp.last_name.toLowerCase() + "@atompayroll.com"}</li>
+          <li className="list-group-item"> <b>Hire Date:</b> {this.props.emp.hire_date.substring(0,10)}</li>
           <li className="list-group-item"> <b>Salary:</b> {this.props.emp.salary}</li>
           <li className="list-group-item"> <b>From - To:</b> {this.props.emp.from_date.substring(0,10) + " " + this.props.emp.to_date.substring(0,10)}</li>
         </ul>

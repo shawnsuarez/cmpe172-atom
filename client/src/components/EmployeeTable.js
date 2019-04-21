@@ -5,13 +5,22 @@ import Can from './Can';
 import Popup from './Popup';
 import EmployeeEditButton from './EmployeeEditButton';
 import EmployeeDeleteButton from './EmployeeDeleteButton';
-//import employees from '../employees';
+import { Pagination } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 export default class EmployeeTable extends React.Component {
   constructor(){
     super();
     this.state = {
       showAddModal: false,
+      maxPage: 5,
+      activePage: 1,
+      boundaryRange: 1,
+      siblingRange: 1,
+      showEllipsis: true,
+      showFirstAndLastNav: true,
+      showPreviousAndNextNav: true,
+      totalPages: 50,
       employees: []
     }
     this.openAddEmployeeModal = this.openAddEmployeeModal.bind(this);
@@ -19,8 +28,13 @@ export default class EmployeeTable extends React.Component {
   }
 
   componentDidMount(){
-	this.getResults();
+	 this.getResults(this.state.activePage);
   }
+
+  handlePaginationChange = (e, { activePage }) => {
+      this.setState({ activePage })
+      this.getResults(activePage);
+    }
 
   openAddEmployeeModal(){
     this.setState({
@@ -34,17 +48,30 @@ export default class EmployeeTable extends React.Component {
     })
   }
 
-	getResults = _ => {
-		let url = window.location.href;
+	getResults = (page) => {
+		let url = "./dashboard/" + page;
 		fetch(url, { method: "GET" })
 			.then(response => response.json())
 			//.then(response => response.text())
 			//.then(text => console.log(text))
-			.then(employees => this.setState({showAddModal: false,employees}))
+			.then(employees => {
+        this.setState({showAddModal: false,employees})
+        console.log(employees[0])
+      })
 			.catch(error => console.log(error));
 	}
 
   render(){
+    const {
+        activePage,
+        boundaryRange,
+        siblingRange,
+        showEllipsis,
+        showFirstAndLastNav,
+        showPreviousAndNextNav,
+        totalPages,
+      } = this.state
+
     var addEmployeeForm = (
       <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
         <div class="form-row">
@@ -61,7 +88,7 @@ export default class EmployeeTable extends React.Component {
         <div class="form-row">
           <div class="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
-            <input type="date" class="form-control" name="hireDare" />
+            <input type="date" class="form-control" name="hire_date" />
           </div>
         </div>
         <div class="input-group mb-3" style={{margin:"0 0 0 14px"}}>
@@ -73,11 +100,11 @@ export default class EmployeeTable extends React.Component {
         <div class="form-row" >
           <div class="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>From:</label>
-            <input type="date" class="form-control" name="from"/>
+            <input type="date" class="form-control" name="from_date"/>
           </div>
           <div class="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>To:</label>
-            <input type="date" class="form-control" name="to"/>
+            <input type="date" class="form-control" name="to_date"/>
           </div>
         </div>
         <div class="form-row" >
@@ -87,7 +114,7 @@ export default class EmployeeTable extends React.Component {
           </div>
           <div class="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>Employee ID:</label>
-            <input type="number" class="form-control" name="empID"/>
+            <input type="number" class="form-control" name="emp_no"/>
           </div>
           <div class="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
@@ -141,9 +168,10 @@ export default class EmployeeTable extends React.Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">id</th>
+                  <th scope="col">ID</th>
                   <th scope="col">Name</th>
-                  <th scope="col">email</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Title</th>
                   <Can
                     role={user.role}
                     perform="employee:edit"
@@ -199,6 +227,7 @@ export default class EmployeeTable extends React.Component {
                         	{employee.email == null ? employee.first_name.toLowerCase() 
                         	+ employee.last_name.toLowerCase() + "@atompayroll.com" : null}
                         </td>
+                        <td>{employee.title}</td>
                         <td>
                           <Can
                             role={user.role}
@@ -259,6 +288,20 @@ export default class EmployeeTable extends React.Component {
               </tbody>
 
             </table>
+            <div className="container" style={{ padding: "0px 15%"}}>
+              <Pagination
+                activePage={activePage}
+                boundaryRange={boundaryRange}
+                onPageChange={this.handlePaginationChange}
+                siblingRange={siblingRange}
+                totalPages={totalPages}
+                
+                firstItem={showFirstAndLastNav ? undefined : null}
+                lastItem={showFirstAndLastNav ? undefined : null}
+                prevItem={showPreviousAndNextNav ? undefined : null}
+                nextItem={showPreviousAndNextNav ? undefined : null}
+              />
+            </div>
           </div>
         )}
       </AuthConsumer>

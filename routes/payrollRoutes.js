@@ -15,6 +15,7 @@ router.get("/:page", (req, res) => {
 		INNER JOIN (SELECT * FROM SALARIES s GROUP BY s.emp_no LIMIT ${empPerPage} OFFSET ${page}) AS Sal 
 		ON e.emp_no = Sal.emp_no 
 		INNER JOIN (SELECT * FROM TITLES t GROUP BY t.emp_no) As Titles
+		ON e.emp_no = Titles.emp_no
 		LIMIT ${empPerPage} OFFSET ${page}`,
 		(error, results, fields) => {
 			if (error) throw error;

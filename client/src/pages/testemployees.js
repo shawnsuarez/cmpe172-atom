@@ -1,32 +1,47 @@
 import React, { Component } from "react";
+import { Pagination } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 class TestEmployeePage extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			page: parseInt(this.props.match.params.page),
 			maxPage: 5,
+			activePage: 1,
+		    boundaryRange: 1,
+		    siblingRange: 1,
+		    showEllipsis: true,
+		    showFirstAndLastNav: true,
+		    showPreviousAndNextNav: true,
+		    totalPages: 50,
 			employees: []
 		}
 	}
 
+  	handlePaginationChange = (e, { activePage }) => {
+  		this.setState({ activePage })
+  		this.getResults(activePage);
+  	}
+
 	componentDidMount(){
-		this.getResults();
+		this.getResults(this.state.activePage);
 		/*let newState = Object.assign({}, this.state);
 		newState.page = this.props.match.params.page;
 		this.setState(newState);
 		console.log(newState);*/
 	}
 
-	getResults = _ => {
-		let url = window.location.href;
+	getResults = (page) => {
+		let url = "./employeestest/" + page;
 		fetch(url, { method: "GET" })
-			.then(response => response.json())
-			//.then(response => response.text())
-			//.then(text => console.log(text))
-			.then(employees => this.setState({employees}))
-			.catch(error => console.log(error));
+		.then(response => response.json())
+		//.then(response => response.text())
+		//.then(text => console.log(text))
+		.then(employees => {
+			this.setState({employees})
+		})
+		.catch(error => console.log(error));
 		/*fetch(url)
 			.then(response => {
 				const contentType = response.headers.get("content-type");
@@ -42,6 +57,11 @@ class TestEmployeePage extends Component {
 					});
 				}
 			});*/
+	}
+
+	checkEmps() {
+		console.log(this.state.employees[0]);
+		console.log(this.state);
 	}
 
 	handleDelete(emp_no) {
@@ -64,8 +84,16 @@ class TestEmployeePage extends Component {
 	}
 
 	render() {
-		let prevPage = this.state.page > 1 ? this.state.page - 1 : 1;
-    	let nextPage = this.state.page < this.state.maxPage ? this.state.page + 1 : this.state.maxPage;
+		const {
+	      activePage,
+	      boundaryRange,
+	      siblingRange,
+	      showEllipsis,
+	      showFirstAndLastNav,
+	      showPreviousAndNextNav,
+	      totalPages,
+	    } = this.state
+
 		return (
 			<div>
 				<h1>TestEmployeePage</h1>
@@ -90,16 +118,21 @@ class TestEmployeePage extends Component {
 						)}
 					</tbody>
 				</table>
-				<nav aria-label="Page navigation example">
-                  <ul className="pagination justify-content-center">
-                    <li className="page-item"><a className="page-link" href={"/employeestest/" + prevPage}>Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="/employeestest/1">1</a></li>
-                        <li className="page-item"><a className="page-link" href="/employeestest/2">2</a></li>
-                        <li className="page-item"><a className="page-link" href="/employeestest/3">3</a></li>
-                        <li className="page-item"><a className="page-link" href={"/employeestest/" + nextPage}>Next</a></li>
-                  </ul>
-                </nav>
-                <button className="btn btn-danger" onClick={() => this.handleDelete("10005")}>Delete</button>
+                <button className="btn btn-danger" onClick={() => this.checkEmps()}>Check</button>
+				
+				<Pagination
+					activePage={activePage}
+					boundaryRange={boundaryRange}
+					onPageChange={this.handlePaginationChange}
+					siblingRange={siblingRange}
+					totalPages={totalPages}
+					
+					firstItem={showFirstAndLastNav ? undefined : null}
+					lastItem={showFirstAndLastNav ? undefined : null}
+					prevItem={showPreviousAndNextNav ? undefined : null}
+					nextItem={showPreviousAndNextNav ? undefined : null}
+				/>
+				
 			</div>
 		);
 	}

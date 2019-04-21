@@ -31,15 +31,6 @@ class DashboardPage extends React.Component {
                 <div style={{padding:"1em"}}>
                   <div>
                     <EmployeeTable />
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination justify-content-center">
-                        <li className="page-item"><a className="page-link" href={"/dashboard/" + prevPage}>Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="/dashboard/1">1</a></li>
-                        <li className="page-item"><a className="page-link" href="/dashboard/2">2</a></li>
-                        <li className="page-item"><a className="page-link" href="/dashboard/3">3</a></li>
-                        <li className="page-item"><a className="page-link" href={"/dashboard/" + nextPage}>Next</a></li>
-                      </ul>
-                    </nav>
                   </div>
                 </div>
               </div>

@@ -19,11 +19,11 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={HomePage}/>
-              <Route path="/dashboard/:page" component={DashboardPage}/>
+              <Route path="/dashboard" component={DashboardPage}/>
               <Route path="/departments" component={Departments}/>
               <Route path="/about" component={About}/>
               <Route path="/callback" component={CallbackPage}/>
-              <Route path="/employeestest/:page" component={TestEmployeePage}/>
+              <Route path="/employeestest" component={TestEmployeePage}/>
               <Route path="/payrolltest/:page" component={TestPayrollPage}/>
             </Switch>
           </Router>
