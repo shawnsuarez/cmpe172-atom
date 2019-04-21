@@ -7,7 +7,9 @@ const employees = [
     salary:"$50,000",
     hireDate:"2/13/2018",
     to:null,
-    from:null
+    from:null,
+    empTitle:"Sales Manager",
+    deptNum:"d001"
   },
   {
     id: "2",
@@ -17,7 +19,9 @@ const employees = [
     salary:"$50,000",
     hireDate:"2/13/2018",
     to:null,
-    from:null
+    from:null,
+    empTitle:"Research Intern",
+    deptNum:"d003"
   },
   {
     id: "3",
@@ -27,7 +31,9 @@ const employees = [
     salary:"$50,000",
     hireDate:"2/13/2018",
     to:null,
-    from:null
+    from:null,
+    empTitle:"Marketing Manager",
+    deptNum:"d004"
   },
   {
     id: "4",
@@ -37,7 +43,9 @@ const employees = [
     salary:"$50,000",
     hireDate:"2/13/2018",
     to:null,
-    from:null
+    from:null,
+    empTitle:"Head Of Development",
+    deptNum:"d002"
   }
 ];
 
