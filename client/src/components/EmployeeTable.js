@@ -720,10 +720,6 @@ export default class EmployeeTable extends React.Component {
                       <tr key={employee.emp_no}>
                         <td>{employee.emp_no}</td>
                         <td>{employee.first_name +" "+ employee.last_name}</td>
-                        <td>
-                        	{employee.email == null ? employee.first_name.toLowerCase()
-                        	+ employee.last_name.toLowerCase() + "@atompayroll.com" : null}
-                        </td>
                         <td>{employee.title}</td>
                         <td>
                           <Can
