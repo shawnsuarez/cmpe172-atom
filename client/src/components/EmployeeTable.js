@@ -6,6 +6,7 @@ import Popup from './Popup';
 import EmployeeEditButton from './EmployeeEditButton';
 import EmployeeDeleteButton from './EmployeeDeleteButton';
 import { Pagination } from 'semantic-ui-react';
+import Employees from '../employees'
 import 'semantic-ui-css/semantic.min.css';
 
 export default class EmployeeTable extends React.Component {
@@ -21,10 +22,34 @@ export default class EmployeeTable extends React.Component {
       showFirstAndLastNav: true,
       showPreviousAndNextNav: true,
       totalPages: 50,
-      employees: []
+      employees: Employees,
+
+      sortedByID: false,
+      sortedByName: false,
+      sortedByTitle: false,
+      sortedByHireDate: false,
+      sortedBySalary: false,
+      sortedByFrom: false,
+      sortedByTo: false,
+
+      sortedByIDReversed: false,
+      sortedByNameReversed: false,
+      sortedByTitleReversed: false,
+      sortedByHireDateReversed: false,
+      sortedBySalaryReversed: false,
+      sortedByFromReversed: false,
+      sortedByToReversed: false,
     }
     this.openAddEmployeeModal = this.openAddEmployeeModal.bind(this);
     this.closeAddEmployeeModal = this.closeAddEmployeeModal.bind(this);
+    this.sortByID = this.sortByID.bind(this);
+    this.sortByName = this.sortByName.bind(this);
+    this.compareByName = this.compareByName.bind(this);
+    this.sortByTitle = this.sortByTitle.bind(this);
+    this.sortByHireDate = this.sortByHireDate.bind(this);
+    this.sortBySalary = this.sortBySalary.bind(this);
+    this.sortByFrom = this.sortByFrom.bind(this);
+    this.sortByTo = this.sortByTo.bind(this);
   }
 
   componentDidMount(){
@@ -47,6 +72,387 @@ export default class EmployeeTable extends React.Component {
       showAddModal: false,
     })
   }
+
+  // ---------- Sort By ID -----------
+  compareByID(a, b){
+    if(a.emp_no > b.emp_no){
+      return 1
+    }
+    if(a.emp_no < b.emp_no){
+      return -1
+    }
+    return 0
+  }
+
+  sortByID(){
+    if(!this.state.sortedByID){
+      this.setState({
+        employees: this.state.employees.sort(this.compareByID),
+        sortedByID: true,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: true,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
+
+  // ---------- Sort By Name -----------
+  compareByName(a, b){
+    if(a.first_name > b.first_name){
+      return 1
+    }
+    if(a.first_name < b.first_name){
+      return -1
+    }
+    return 0
+  }
+
+  sortByName(){
+    if(!this.state.sortedByName){
+      this.setState({
+        employees: this.state.employees.sort(this.compareByName),
+        sortedByID: false,
+        sortedByName: true,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: false,
+        sortedByNameReversed: true,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
+  // ---------- Sort By Title -----------
+  compareByTitle(a, b){
+    if(a.title > b.title){
+      return 1
+    }
+    if(a.title < b.title){
+      return -1
+    }
+    return 0
+  }
+
+  sortByTitle(){
+    if(!this.state.sortedByTitle){
+      this.setState({
+        employees: this.state.employees.sort(this.compareByTitle),
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: true,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: true,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
+  // ---------- Sort By Hire Date -----------
+  compareByHireDate(a, b){
+    if(a.hire_date > b.hire_date){
+      return 1
+    }
+    if(a.hire_date < b.hire_date){
+      return -1
+    }
+    return 0
+  }
+
+  sortByHireDate(){
+    if(!this.state.sortedByHireDate){
+      this.setState({
+        employees: this.state.employees.sort(this.compareByHireDate),
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: true,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: true,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
+  // ---------- Sort By Salary -----------
+  compareBySalary(a, b){
+    if(a.salary > b.salary){
+      return 1
+    }
+    if(a.salary < b.salary){
+      return -1
+    }
+    return 0
+  }
+
+  sortBySalary(){
+    if(!this.state.sortedBySalary){
+      this.setState({
+        employees: this.state.employees.sort(this.compareBySalary),
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: true,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: true,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
+  // ---------- Sort By From Date -----------
+  compareByFrom(a, b){
+    if(a.from_date > b.from_date){
+      return 1
+    }
+    if(a.from_date < b.from_date){
+      return -1
+    }
+    return 0
+  }
+
+  sortByFrom(){
+    if(!this.state.sortedByFrom){
+      this.setState({
+        employees: this.state.employees.sort(this.compareByFrom),
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: true,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: true,
+        sortedByToReversed: false,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
+  // ---------- Sort By To Date -----------
+  compareByTo(a, b){
+    if(a.to_date > b.to_date){
+      return 1
+    }
+    if(a.to_date < b.to_date){
+      return -1
+    }
+    return 0
+  }
+
+  sortByTo(){
+    if(!this.state.sortedByTo){
+      this.setState({
+        employees: this.state.employees.sort(this.compareByTo),
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: true,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false,
+      });
+    }
+    else{
+      this.setState({
+        employees: this.state.employees.reverse(),
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: true,
+
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+      })
+    }
+  }
+
 
 	getResults = (page) => {
 		let url = "./dashboard/" + page;
@@ -168,36 +574,119 @@ export default class EmployeeTable extends React.Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Title</th>
+                  <th scope="col">
+                    <button class="btn btn-light" onClick={this.sortByID}>
+                      {
+                        this.state.sortedByID ?
+                        "ID ↓"
+                        :
+                        this.state.sortedByIDReversed ?
+                        "ID ↑"
+                        :
+                        "ID"
+                      }
+                    </button>
+                  </th>
+                  <th scope="col">
+                    <button class="btn btn-light" onClick={this.sortByName}>
+                    {
+                      this.state.sortedByName ?
+                      "Name ↓"
+                      :
+                      this.state.sortedByNameReversed ?
+                      "Name ↑"
+                      :
+                      "Name"
+                    }
+                    </button>
+                  </th>
+                  <th scope="col">
+                    <button class="btn btn-light" onClick={this.sortByTitle}>
+                    {
+                      this.state.sortedByTitle ?
+                      "Title ↓"
+                      :
+                      this.state.sortedByTitleReversed ?
+                      "Title ↑"
+                      :
+                      "Title"
+                    }
+                    </button>
+                  </th>
                   <Can
                     role={user.role}
                     perform="employee:edit"
                     yes={() => (
-                      <th scope="col">Hire Date</th>
+                      <th scope="col">
+                        <button class="btn btn-light" onClick={this.sortByHireDate}>
+                        {
+                          this.state.sortedByHireDate ?
+                          "Hire Date ↓"
+                          :
+                          this.state.sortedByHireDateReversed ?
+                          "Hire Date ↑"
+                          :
+                          "Hire Date"
+                        }
+                        </button>
+                      </th>
                     )}
                   />
                   <Can
                     role={user.role}
                     perform="employee:edit"
                     yes={() => (
-                      <th scope="col">Salary</th>
+                      <th scope="col">
+                        <button class="btn btn-light" onClick={this.sortBySalary}>
+                        {
+                          this.state.sortedBySalary ?
+                          "Salary ↓"
+                          :
+                          this.state.sortedBySalaryReversed ?
+                          "Salary ↑"
+                          :
+                          "Salary"
+                        }
+                        </button>
+                      </th>
                     )}
                   />
                   <Can
                     role={user.role}
                     perform="employee:edit"
                     yes={() => (
-                      <th scope="col">From</th>
+                      <th scope="col">
+                        <button class="btn btn-light" onClick={this.sortByFrom}>
+                        {
+                          this.state.sortedByFrom ?
+                          "From ↓"
+                          :
+                          this.state.sortedByFromReversed ?
+                          "From ↑"
+                          :
+                          "From"
+                        }
+                        </button>
+                      </th>
                     )}
                   />
                   <Can
                     role={user.role}
                     perform="employee:edit"
                     yes={() => (
-                      <th scope="col">To</th>
+                      <th scope="col">
+                        <button className="btn btn-light" onClick={this.sortByTo}>
+                        {
+                          this.state.sortedByTo ?
+                          "To ↓"
+                          :
+                          this.state.sortedByToReversed ?
+                          "To ↑"
+                          :
+                          "To"
+                        }
+                        </button>
+                      </th>
                     )}
                   />
 
@@ -205,14 +694,22 @@ export default class EmployeeTable extends React.Component {
                     role={user.role}
                     perform="employee:edit"
                     yes={() => (
-                      <th scope="col">Edit</th>
+                      <th scope="col">
+                        <button className="btn btn-light">
+                          Edit
+                        </button>
+                      </th>
                     )}
                   />
                   <Can
                     role={user.role}
                     perform="employee:delete"
                     yes={() => (
-                      <th scope="col">Delete</th>
+                      <th scope="col">
+                        <button className="btn btn-light">
+                          Delete
+                        </button>
+                      </th>
                     )}
                   />
                 </tr>
@@ -223,10 +720,6 @@ export default class EmployeeTable extends React.Component {
                       <tr key={employee.emp_no}>
                         <td>{employee.emp_no}</td>
                         <td>{employee.first_name +" "+ employee.last_name}</td>
-                        <td>
-                        	{employee.email == null ? employee.first_name.toLowerCase() 
-                        	+ employee.last_name.toLowerCase() + "@atompayroll.com" : null}
-                        </td>
                         <td>{employee.title}</td>
                         <td>
                           <Can
@@ -242,7 +735,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:edit"
                             yes={() => (
-                              employee.salary
+                              "$"+employee.salary
                             )}
                           />
                         </td>
@@ -295,7 +788,7 @@ export default class EmployeeTable extends React.Component {
                 onPageChange={this.handlePaginationChange}
                 siblingRange={siblingRange}
                 totalPages={totalPages}
-                
+
                 firstItem={showFirstAndLastNav ? undefined : null}
                 lastItem={showFirstAndLastNav ? undefined : null}
                 prevItem={showPreviousAndNextNav ? undefined : null}
