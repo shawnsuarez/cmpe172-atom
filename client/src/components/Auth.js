@@ -13,13 +13,16 @@ const auth = new auth0.WebAuth({
 });
 
 class Auth extends Component {
-  state = {
-    authenticated: false,
-    user: {
-      role: "admin"
-    },
-    accessToken: ""
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      authenticated: false,
+      user: {
+        role: "employee"
+      },
+      accessToken: ""
+    };
+  }
 
   initiateLogin = () => {
     auth.authorize();
@@ -53,12 +56,22 @@ class Auth extends Component {
       email: data.email,
       role: data[AUTH_CONFIG.roleUrl]
     };
+
+    localStorage.setItem("currentUser", JSON.stringify(user));
+
     this.setState({
       authenticated: true,
       accessToken: data.accessToken,
       user
     });
   }
+
+  componentDidMount(){
+    this.setState({
+      user: JSON.parse(localStorage.getItem('currentUser')),
+    })
+  }
+
 
   render() {
     const authProviderValue = {
