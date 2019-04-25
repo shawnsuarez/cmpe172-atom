@@ -1,11 +1,10 @@
 const mysql = require("mysql");
 
 const connection = mysql.createConnection({
-	host: 'atompayroll.mysql.database.azure.com',
-	user: 'atompayroll@atompayroll',
-	password: 'Cmpe172!',
-	database: 'employees',
-	port: 3306,
+	host: "us-cdbr-iron-east-02.cleardb.net",
+	user: "b38a4dbb421b96",
+	password: "be54f0d0",
+	database: "heroku_bd28f8170ef19ac",
 	multipleStatements: true
 });
 
