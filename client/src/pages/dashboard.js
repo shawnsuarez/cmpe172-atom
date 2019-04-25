@@ -31,6 +31,7 @@ class DashboardPage extends React.Component {
                 <div style={{padding:"1em"}}>
                   <div>
                     <EmployeeTable />
+                    {console.log(user.role)}
                   </div>
                 </div>
               </div>

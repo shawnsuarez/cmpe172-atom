@@ -479,51 +479,51 @@ export default class EmployeeTable extends React.Component {
 
     var addEmployeeForm = (
       <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
-        <div class="form-row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="First name" />
+        <div className="form-row">
+          <div className="col">
+            <input type="text" className="form-control" placeholder="First name" />
           </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" />
+          <div className="col">
+            <input type="text" className="form-control" placeholder="Last name" />
           </div>
         </div>
-        <div class="form-group" style={{margin:"-14px 0 0 0"}}>
-          <input type="email" class="form-control" id="email" placeholder="email"/>
+        <div className="form-group" style={{margin:"-14px 0 0 0"}}>
+          <input type="email" className="form-control" id="email" placeholder="email"/>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
+        <div className="form-row">
+          <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
-            <input type="date" class="form-control" name="hire_date" />
+            <input type="date" className="form-control" name="hire_date" />
           </div>
         </div>
-        <div class="input-group mb-3" style={{margin:"0 0 0 14px"}}>
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+        <div className="input-group mb-3" style={{margin:"0 0 0 14px"}}>
+          <div className="input-group-prepend">
+            <span className="input-group-text">$</span>
           </div>
-          <input type="number" class="form-control" min="1" step="100" style={{margin:"0 0 0 0"}} placeholder="Salary"/>
+          <input type="number" className="form-control" min="1" step="100" style={{margin:"0 0 0 0"}} placeholder="Salary"/>
         </div>
-        <div class="form-row" >
-          <div class="form-group col-md-4">
+        <div className="form-row" >
+          <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>From:</label>
-            <input type="date" class="form-control" name="from_date"/>
+            <input type="date" className="form-control" name="from_date"/>
           </div>
-          <div class="form-group col-md-4">
+          <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>To:</label>
-            <input type="date" class="form-control" name="to_date"/>
+            <input type="date" className="form-control" name="to_date"/>
           </div>
         </div>
-        <div class="form-row" >
-          <div class="form-group col-md-5">
+        <div className="form-row" >
+          <div className="form-group col-md-5">
             <label style={{margin:"0 0 0 18px"}}>Employee Title:</label>
-            <input type="text" class="form-control" name="empTitle"/>
+            <input type="text" className="form-control" name="empTitle"/>
           </div>
-          <div class="form-group col-md-4">
+          <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>Employee ID:</label>
-            <input type="number" class="form-control" name="emp_no"/>
+            <input type="number" className="form-control" name="emp_no"/>
           </div>
-          <div class="form-group col-md-3">
+          <div className="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
-            <select class="form-control" style={{margin:"1em 0 0 1em"}}>
+            <select className="form-control" style={{margin:"1em 0 0 1em"}}>
               <option>d001</option>
               <option>d002</option>
               <option>d003</option>

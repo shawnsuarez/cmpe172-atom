@@ -24,6 +24,7 @@ class DepartmentPage extends React.Component {
               yes={() => (
                 <div>
                   <Navbar/>
+                  {console.log(user.role)}
                   <div style={{padding:"1em"}}>
                     <div className="dropdown">
                       <h2 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
