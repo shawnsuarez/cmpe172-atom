@@ -16,7 +16,7 @@ class Auth extends Component {
   state = {
     authenticated: false,
     user: {
-      role: "visitor"
+      role: "admin"
     },
     accessToken: ""
   };
