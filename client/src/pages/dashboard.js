@@ -17,11 +17,11 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-    let prevPage = this.state.page > 1 ? this.state.page - 1 : 1;
-    let nextPage = this.state.page < this.state.maxPage ? this.state.page + 1 : this.state.maxPage;
     return (
       <AuthConsumer>
-        {({ user }) => (
+        {({ user, accessToken }) => (
+          console.log("User",user),
+          console.log("Access Token", accessToken),
           <Can
             role={user.role}
             perform="dashboard-page:visit"

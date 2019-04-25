@@ -462,7 +462,6 @@ export default class EmployeeTable extends React.Component {
 			//.then(text => console.log(text))
 			.then(employees => {
         this.setState({showAddModal: false,employees})
-        console.log(employees[0])
       })
 			.catch(error => console.log(error));
 	}
@@ -575,7 +574,7 @@ export default class EmployeeTable extends React.Component {
               <thead>
                 <tr>
                   <th scope="col">
-                    <button class="btn btn-light" onClick={this.sortByID}>
+                    <button className="btn btn-light" onClick={this.sortByID}>
                       {
                         this.state.sortedByID ?
                         "ID ↓"
@@ -588,7 +587,7 @@ export default class EmployeeTable extends React.Component {
                     </button>
                   </th>
                   <th scope="col">
-                    <button class="btn btn-light" onClick={this.sortByName}>
+                    <button className="btn btn-light" onClick={this.sortByName}>
                     {
                       this.state.sortedByName ?
                       "Name ↓"
@@ -601,7 +600,7 @@ export default class EmployeeTable extends React.Component {
                     </button>
                   </th>
                   <th scope="col">
-                    <button class="btn btn-light" onClick={this.sortByTitle}>
+                    <button className="btn btn-light" onClick={this.sortByTitle}>
                     {
                       this.state.sortedByTitle ?
                       "Title ↓"
@@ -618,7 +617,7 @@ export default class EmployeeTable extends React.Component {
                     perform="employee:edit"
                     yes={() => (
                       <th scope="col">
-                        <button class="btn btn-light" onClick={this.sortByHireDate}>
+                        <button className="btn btn-light" onClick={this.sortByHireDate}>
                         {
                           this.state.sortedByHireDate ?
                           "Hire Date ↓"
@@ -637,7 +636,7 @@ export default class EmployeeTable extends React.Component {
                     perform="employee:edit"
                     yes={() => (
                       <th scope="col">
-                        <button class="btn btn-light" onClick={this.sortBySalary}>
+                        <button className="btn btn-light" onClick={this.sortBySalary}>
                         {
                           this.state.sortedBySalary ?
                           "Salary ↓"
@@ -656,7 +655,7 @@ export default class EmployeeTable extends React.Component {
                     perform="employee:edit"
                     yes={() => (
                       <th scope="col">
-                        <button class="btn btn-light" onClick={this.sortByFrom}>
+                        <button className="btn btn-light" onClick={this.sortByFrom}>
                         {
                           this.state.sortedByFrom ?
                           "From ↓"

@@ -16,11 +16,11 @@ class Navbar extends Component {
               {
                 window.location.href.indexOf("dashboard") > -1 ?
                 <li className="nav-item active">
-                  <Link className="nav-link" to="/dashboard/0" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>Dashboard</Link>
+                  <Link className="nav-link" to="/dashboard" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>Dashboard</Link>
                 </li>
                 :
                 <li className="nav-item">
-                  <Link className="nav-link" to="/dashboard/0">Dashboard</Link>
+                  <Link className="nav-link" to="/dashboard">Dashboard</Link>
                 </li>
               }
               {
@@ -34,7 +34,7 @@ class Navbar extends Component {
                 </li>
               }
               {
-                window.location.href === "http://localhost:3000/about" ?
+                window.location.href === "/about" ?
                 <li className="nav-item active">
                   <Link className="nav-link" to="/about" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>About</Link>
                 </li>
