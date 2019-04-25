@@ -12,7 +12,7 @@ router.get("/:page", (req, res) => {
 	connection.query(
 		`SELECT e.emp_no, e.first_name, e.last_name, title, hire_date, salary, Sal.from_date, Sal.to_date 
 		FROM EMPLOYEES e 
-		INNER JOIN (SELECT * FROM SALARIES s GROUP BY s.emp_no LIMIT ${empPerPage} OFFSET ${page}) AS Sal 
+		INNER JOIN (SELECT * FROM SALARIES s GROUP BY s.emp_no) AS Sal 
 		ON e.emp_no = Sal.emp_no 
 		INNER JOIN (SELECT * FROM TITLES t GROUP BY t.emp_no) As Titles
 		ON e.emp_no = Titles.emp_no

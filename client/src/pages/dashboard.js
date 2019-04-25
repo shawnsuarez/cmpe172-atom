@@ -19,9 +19,7 @@ class DashboardPage extends React.Component {
   render() {
     return (
       <AuthConsumer>
-        {({ user, accessToken }) => (
-          console.log("User",user),
-          console.log("Access Token", accessToken),
+        {({ user }) => (
           <Can
             role={user.role}
             perform="dashboard-page:visit"

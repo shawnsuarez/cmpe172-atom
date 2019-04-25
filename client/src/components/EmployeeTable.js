@@ -461,7 +461,23 @@ export default class EmployeeTable extends React.Component {
 			//.then(response => response.text())
 			//.then(text => console.log(text))
 			.then(employees => {
-        this.setState({showAddModal: false,employees})
+        this.setState({showAddModal: false,
+          employees,
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false})
       })
 			.catch(error => console.log(error));
 	}
