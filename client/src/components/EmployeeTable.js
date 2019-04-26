@@ -10,19 +10,21 @@ import Employees from '../employees'
 import 'semantic-ui-css/semantic.min.css';
 
 export default class EmployeeTable extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       showAddModal: false,
       maxPage: 5,
       activePage: 1,
       boundaryRange: 1,
-      siblingRange: 1,
+      siblingRange: 2,
       showEllipsis: true,
       showFirstAndLastNav: true,
       showPreviousAndNextNav: true,
-      totalPages: 50,
-      employees: Employees,
+      totalPages: 100,
+      employees: [],
+      isDepartment: this.props.isDepartment,
+      currentDept: this.props.currentDept,
 
       sortedByID: false,
       sortedByName: false,
@@ -57,6 +59,9 @@ export default class EmployeeTable extends React.Component {
   }
 
   handlePaginationChange = (e, { activePage }) => {
+  	window.scrollTo(0, 0);
+  	console.log(this.state.isDepartment);
+  	console.log(this.state.currentDept);
       this.setState({ activePage })
       this.getResults(activePage);
     }
@@ -455,31 +460,60 @@ export default class EmployeeTable extends React.Component {
 
 
 	getResults = (page) => {
-		let url = "./dashboard/" + page;
-		fetch(url, { method: "GET" })
-			.then(response => response.json())
-			//.then(response => response.text())
-			//.then(text => console.log(text))
-			.then(employees => {
-        this.setState({showAddModal: false,
-          employees,
-        sortedByID: false,
-        sortedByName: false,
-        sortedByTitle: false,
-        sortedByHireDate: false,
-        sortedBySalary: false,
-        sortedByFrom: false,
-        sortedByTo: false,
+		if (!this.state.isDepartment) {
+			let url = "./dashboard/" + page;
+			fetch(url, { method: "GET" })
+				.then(response => response.json())
+				//.then(response => response.text())
+				//.then(text => console.log(text))
+				.then(employees => {
+	        this.setState({showAddModal: false,
+	          employees,
+	        sortedByID: false,
+	        sortedByName: false,
+	        sortedByTitle: false,
+	        sortedByHireDate: false,
+	        sortedBySalary: false,
+	        sortedByFrom: false,
+	        sortedByTo: false,
 
-        sortedByIDReversed: false,
-        sortedByNameReversed: false,
-        sortedByTitleReversed: false,
-        sortedByHireDateReversed: false,
-        sortedBySalaryReversed: false,
-        sortedByFromReversed: false,
-        sortedByToReversed: false})
-      })
-			.catch(error => console.log(error));
+	        sortedByIDReversed: false,
+	        sortedByNameReversed: false,
+	        sortedByTitleReversed: false,
+	        sortedByHireDateReversed: false,
+	        sortedBySalaryReversed: false,
+	        sortedByFromReversed: false,
+	        sortedByToReversed: false})
+	      })
+				.catch(error => console.log(error));
+		}
+		else {
+			let url = "./departments/" + this.state.currentDept + "/" + page; 
+			fetch(url, { method: "GET" })
+				.then(response => response.json())
+				//.then(response => response.text())
+				//.then(text => console.log(text))
+				.then(employees => {
+	        this.setState({showAddModal: false,
+	          employees,
+	        sortedByID: false,
+	        sortedByName: false,
+	        sortedByTitle: false,
+	        sortedByHireDate: false,
+	        sortedBySalary: false,
+	        sortedByFrom: false,
+	        sortedByTo: false,
+
+	        sortedByIDReversed: false,
+	        sortedByNameReversed: false,
+	        sortedByTitleReversed: false,
+	        sortedByHireDateReversed: false,
+	        sortedBySalaryReversed: false,
+	        sortedByFromReversed: false,
+	        sortedByToReversed: false})
+	      })
+				.catch(error => console.log(error));
+		}
 	}
 
   render(){
@@ -540,15 +574,15 @@ export default class EmployeeTable extends React.Component {
           <div className="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
             <select className="form-control" style={{margin:"1em 0 0 1em"}}>
-              <option>d001</option>
-              <option>d002</option>
-              <option>d003</option>
-              <option>d004</option>
-              <option>d005</option>
-              <option>d006</option>
-              <option>d007</option>
-              <option>d008</option>
-              <option>d009</option>
+              <option>d001 Marketing</option>
+              <option>d002 Finance</option>
+              <option>d003 Human Resources</option>
+              <option>d004 Production</option>
+              <option>d005 Development</option>
+              <option>d006 Quality Management</option>
+              <option>d007 Sales</option>
+              <option>d008 Research</option>
+              <option>d009 Sales</option>
             </select>
           </div>
         </div>
@@ -584,7 +618,20 @@ export default class EmployeeTable extends React.Component {
                   null
                 }
               </h2>
+				<div className="container" style={{ padding: "0px 15%", marginBottom: "1em" }}>
+					<Pagination
+						activePage={activePage}
+						boundaryRange={boundaryRange}
+						onPageChange={this.handlePaginationChange}
+						siblingRange={siblingRange}
+						totalPages={totalPages}
 
+						firstItem={showFirstAndLastNav ? undefined : null}
+						lastItem={showFirstAndLastNav ? undefined : null}
+						prevItem={showPreviousAndNextNav ? undefined : null}
+						nextItem={showPreviousAndNextNav ? undefined : null}
+					/>
+				</div>
             </div>
             <table className="table">
               <thead>

@@ -28,7 +28,7 @@ class DashboardPage extends React.Component {
                 <Navbar user={user}/>
                 <div style={{padding:"1em"}}>
                   <div>
-                    <EmployeeTable />
+                    <EmployeeTable isDepartment={false}/>
                   </div>
                 </div>
               </div>

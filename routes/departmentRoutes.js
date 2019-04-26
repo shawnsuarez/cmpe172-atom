@@ -3,23 +3,29 @@ const router = express.Router({ mergeParams: true });
 const connection = require("../connection.js");
 
 
-router.get("/:dept", async (req, res) => {
+router.get("/:dept/:page", (req, res) => {
 	let dept = req.params.dept;
-	let empPerPage = 25;
-	let page = parseInt(req.params.page) * empPerPage;
+	let empPerPage = 50;
+	let page = (parseInt(req.params.page) - 1) * empPerPage;
+	if (page < 0)
+		page = 0;
 
-	await connection.query(
-		`SELECT e.emp_no, e.first_name, e.last_name, titles.title, e.hire_date 
-		FROM EMPLOYEES e
-		INNER JOIN
-		(SELECT * FROM TITLES) AS titles
-		ON e.emp_no = titles.emp_no
-		INNER JOIN
-		(SELECT d.dept_name, d.dept_no, de.emp_no FROM dept_emp de
-		INNER JOIN DEPARTMENTS d ON de.dept_no = d.dept_no) As depts
-		ON e.emp_no = depts.emp_no
-		WHERE dept_name = "${dept}"
-		GROUP BY e.emp_no`,
+	connection.query(
+		`SELECT e.emp_no, first_name, last_name, title, salary, s.from_date, s.to_date, hire_date 
+		FROM dept_emp de
+				INNER JOIN 
+				(SELECT dept_no 
+		        FROM DEPARTMENTS 
+		        WHERE dept_name = "${dept}") AS d
+				ON d.dept_no = de.dept_no
+		INNER JOIN Employees e 
+		ON e.emp_no = de.emp_no
+		INNER JOIN TITLES t
+		ON de.emp_no = t.emp_no
+		INNER JOIN SALARIES s
+		ON e.emp_no = s.emp_no
+		GROUP BY e.emp_no
+		LIMIT ${empPerPage} OFFSET ${page};`,
 		(error, results, fields) => {
 			if (error) throw error;
 			res.json(results);
