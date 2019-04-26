@@ -4,7 +4,7 @@ const connection = require("../connection.js");
 
 // Show employee payroll
 router.get("/:page", (req, res) => {
-	let empPerPage = 25;
+	let empPerPage = 50;
 	let page = (parseInt(req.params.page) - 1) * empPerPage;
 	if (page < 0)
 		page = 0;
