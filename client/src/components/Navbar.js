@@ -34,7 +34,7 @@ class Navbar extends Component {
                 </li>
               }
               {
-                window.location.href === "http://localhost:3000/about" ?
+                window.location.href.indexOf("about") > -1 ?
                 <li className="nav-item active">
                   <Link className="nav-link" to="/about" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>About</Link>
                 </li>
