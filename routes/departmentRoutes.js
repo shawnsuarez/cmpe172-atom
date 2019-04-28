@@ -32,4 +32,36 @@ router.get("/:dept/:page", (req, res) => {
 	});
 });
 
+// Create employee
+router.post("/:dept/addemployee", (req, res) => {
+	let empNo = req.body.emp_no;
+
+	connection.query(
+		`INSERT INTO EMPLOYEES(emp_no, first_name, last_name, hire_date) VALUES ( ?, ?, ?, ?);
+		INSERT INTO DEPT_EMP(emp_no, dept_no) VALUES ( ?, ?);
+		INSERT INTO SALARIES(emp_no, salary, from_date, to_date) VALUES ( ?, ?, ?, ?);
+		INSERT INTO TITLES(emp_no, title) VALUES ( ?, ?);`, 
+		[ empNo, req.body.first_name, req.body.last_name, req.body.hire_date,
+			empNo, req.body.dept_no,
+			empNo, req.body.salary, req.body.from_date, req.body.to_date,
+			empNo, req.body.empTitle],
+		(error, results, fields) => {
+			if(error) throw error;
+			res.json(results);
+		}
+	);
+});
+
+// Delete employee
+router.post("/delete", (req, res) => {
+	let empNo = req.body.emp_no;
+	connection.query(
+	`DELETE FROM EMPLOYEES WHERE emp_no = ?`,
+	[empNo],
+	(error, results, fields) => {
+		if (error) throw error;
+		res.json(results);
+	});
+});
+
 module.exports = router;

@@ -70,23 +70,6 @@ class EmployeeEditButton extends React.Component {
        </form>
       */},
       <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
-        <div className="form-row">
-          <div className="col">
-            <input type="text" className="form-control" placeholder={this.props.emp.first_name} />
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" placeholder={this.props.emp.last_name}/>
-          </div>
-        </div>
-        <div className="form-group" style={{margin:"-14px 0 0 0"}}>
-          <input type="email" className="form-control" id="email" placeholder={this.props.emp.first_name.toLowerCase() + this.props.emp.last_name.toLowerCase() + "@atompayroll.com"}/>
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-4">
-            <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
-            <input type="date" className="form-control" name="hire_date" placeholder={this.props.emp.hire_date}/>
-          </div>
-        </div>
         <div className="input-group mb-3" style={{margin:"0 0 0 14px"}}>
           <div className="input-group-prepend">
             <span className="input-group-text">$</span>
@@ -115,15 +98,15 @@ class EmployeeEditButton extends React.Component {
           <div className="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
             <select className="form-control" style={{margin:"1em 0 0 1em"}} placeholder={this.props.emp.dept_no}>
-              <option>d001 Marketing</option>
-              <option>d002 Finance</option>
-              <option>d003 Human Resources</option>
-              <option>d004 Production</option>
-              <option>d005 Development</option>
-              <option>d006 Quality Management</option>
-              <option>d007 Sales</option>
-              <option>d008 Research</option>
-              <option>d009 Sales</option>
+              <option value="d001">Marketing</option>
+              <option value="d002">Finance</option>
+              <option value="d003">Human Resources</option>
+              <option value="d004">Production</option>
+              <option value="d005">Development</option>
+              <option value="d006">Quality Management</option>
+              <option value="d007">Sales</option>
+              <option value="d008">Research</option>
+              <option value="d009">Sales</option>
             </select>
           </div>
         </div>
