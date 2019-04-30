@@ -17,7 +17,7 @@ export default class EmployeeTable extends React.Component {
       maxPage: 5,
       activePage: 1,
       boundaryRange: 1,
-      siblingRange: 2,
+      siblingRange: 3,
       showEllipsis: true,
       showFirstAndLastNav: true,
       showPreviousAndNextNav: true,
@@ -25,6 +25,16 @@ export default class EmployeeTable extends React.Component {
       employees: [],
       isDepartment: this.props.isDepartment,
       currentDept: this.props.currentDept,
+
+      addEmpNo: "1",
+      addFirstName: "First",
+      addLastName: "Last",
+      addHireDate: "9999-01-01",
+      addDeptNo: "d001",
+      addSalary: "1",
+      addFromDate: "9999-01-01",
+      addToDate: "9999-01-01",
+      addEmpTitle: "Title",
 
       sortedByID: false,
       sortedByName: false,
@@ -52,6 +62,8 @@ export default class EmployeeTable extends React.Component {
     this.sortBySalary = this.sortBySalary.bind(this);
     this.sortByFrom = this.sortByFrom.bind(this);
     this.sortByTo = this.sortByTo.bind(this);
+    this.logChange = this.logChange.bind(this);
+    this.handleAddEmployee = this.handleAddEmployee.bind(this);
   }
 
   componentDidMount(){
@@ -60,11 +72,105 @@ export default class EmployeeTable extends React.Component {
 
   handlePaginationChange = (e, { activePage }) => {
   	window.scrollTo(0, 0);
-  	console.log(this.state.isDepartment);
-  	console.log(this.state.currentDept);
       this.setState({ activePage })
       this.getResults(activePage);
     }
+
+  handleAddEmployee = (e) => {
+    e.preventDefault();
+    let data = {
+      emp_no: this.state.addEmpNo,
+      first_name: this.state.addFirstName,
+      last_name: this.state.addLastName,
+      hire_date: this.state.addHireDate,
+      dept_no: this.state.addDeptNo,
+      salary: this.state.addSalary,
+      from_date: this.state.addFromDate,
+      to_date: this.state.addToDate,
+      empTitle: this.state.addEmpTitle
+    }
+    let url;
+    if (this.state.isDepartment)
+      url = "/departments/" + this.state.currentDept + "/addemployee";
+    else
+      url = "/dashboard/addemployee";
+    fetch(url, { 
+      method: 'POST',
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        window.location.reload();
+    }).catch((err) => {
+        console.log(err)
+    }); 
+    this.closeAddEmployeeModal();
+  }
+
+  logChange(e) {
+    let stateObj = { [e.target.name]: e.target.value }
+    this.setState(stateObj);
+  }
+
+  getResults = (page) => {
+  if (!this.state.isDepartment) {
+    let url = "/dashboard/" + page;
+    fetch(url, { method: "GET" })
+      .then(response => response.json())
+      //.then(response => response.text())
+      //.then(text => console.log(text))
+      .then(employees => {
+        this.setState({showAddModal: false,
+          employees,
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false})
+      })
+      .catch(error => console.log(error));
+  }
+  else {
+    let url = "/departments/" + this.state.currentDept + "/" + page; 
+    fetch(url, { method: "GET" })
+      .then(response => response.json())
+      //.then(response => response.text())
+      //.then(text => console.log(text))
+      .then(employees => {
+        this.setState({showAddModal: false,
+          employees,
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false})
+      })
+      .catch(error => console.log(error));
+    }
+  }
 
   openAddEmployeeModal(){
     this.setState({
@@ -458,64 +564,6 @@ export default class EmployeeTable extends React.Component {
     }
   }
 
-
-	getResults = (page) => {
-		if (!this.state.isDepartment) {
-			let url = "./dashboard/" + page;
-			fetch(url, { method: "GET" })
-				.then(response => response.json())
-				//.then(response => response.text())
-				//.then(text => console.log(text))
-				.then(employees => {
-	        this.setState({showAddModal: false,
-	          employees,
-	        sortedByID: false,
-	        sortedByName: false,
-	        sortedByTitle: false,
-	        sortedByHireDate: false,
-	        sortedBySalary: false,
-	        sortedByFrom: false,
-	        sortedByTo: false,
-
-	        sortedByIDReversed: false,
-	        sortedByNameReversed: false,
-	        sortedByTitleReversed: false,
-	        sortedByHireDateReversed: false,
-	        sortedBySalaryReversed: false,
-	        sortedByFromReversed: false,
-	        sortedByToReversed: false})
-	      })
-				.catch(error => console.log(error));
-		}
-		else {
-			let url = "./departments/" + this.state.currentDept + "/" + page; 
-			fetch(url, { method: "GET" })
-				.then(response => response.json())
-				//.then(response => response.text())
-				//.then(text => console.log(text))
-				.then(employees => {
-	        this.setState({showAddModal: false,
-	          employees,
-	        sortedByID: false,
-	        sortedByName: false,
-	        sortedByTitle: false,
-	        sortedByHireDate: false,
-	        sortedBySalary: false,
-	        sortedByFrom: false,
-	        sortedByTo: false,
-
-	        sortedByIDReversed: false,
-	        sortedByNameReversed: false,
-	        sortedByTitleReversed: false,
-	        sortedByHireDateReversed: false,
-	        sortedBySalaryReversed: false,
-	        sortedByFromReversed: false,
-	        sortedByToReversed: false})
-	      })
-				.catch(error => console.log(error));
-		}
-	}
-
   render(){
     const {
         activePage,
@@ -528,65 +576,96 @@ export default class EmployeeTable extends React.Component {
       } = this.state
 
     var addEmployeeForm = (
-      <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
+      <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}} onSubmit={this.handleAddEmployee}>
         <div className="form-row">
           <div className="col">
-            <input type="text" className="form-control" placeholder="First name" />
+            <input type="text" className="form-control" 
+              onChange={this.logChange} 
+              placeholder="First name" 
+              name="addFirstName"
+            />
           </div>
           <div className="col">
-            <input type="text" className="form-control" placeholder="Last name" />
+            <input type="text" className="form-control" 
+              onChange={this.logChange} 
+              placeholder="Last name" 
+              name="addLastName"
+            />
           </div>
-        </div>
-        <div className="form-group" style={{margin:"-14px 0 0 0"}}>
-          <input type="email" className="form-control" id="email" placeholder="email"/>
         </div>
         <div className="form-row">
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
-            <input type="date" className="form-control" name="hire_date" />
+            <input type="date" className="form-control" 
+              onChange={this.logChange} 
+              name="addHireDate" 
+            />
           </div>
         </div>
         <div className="input-group mb-3" style={{margin:"0 0 0 14px"}}>
           <div className="input-group-prepend">
             <span className="input-group-text">$</span>
           </div>
-          <input type="number" className="form-control" min="1" step="100" style={{margin:"0 0 0 0"}} placeholder="Salary"/>
+          <input type="number" className="form-control" 
+            style={{margin:"0 0 0 0"}} 
+            onChange={this.logChange} 
+            placeholder="Salary" 
+            name="addSalary"
+          />
         </div>
         <div className="form-row" >
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>From:</label>
-            <input type="date" className="form-control" name="from_date"/>
+            <input type="date" className="form-control" 
+              onChange={this.logChange} 
+              name="addFromDate"
+            />
           </div>
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>To:</label>
-            <input type="date" className="form-control" name="to_date"/>
+            <input type="date" className="form-control" 
+              onChange={this.logChange} 
+              name="addToDate"
+            />
           </div>
         </div>
         <div className="form-row" >
           <div className="form-group col-md-5">
             <label style={{margin:"0 0 0 18px"}}>Employee Title:</label>
-            <input type="text" className="form-control" name="empTitle"/>
+            <input type="text" className="form-control" 
+              onChange={this.logChange} 
+              name="addEmpTitle"
+            />
           </div>
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>Employee ID:</label>
-            <input type="number" className="form-control" name="emp_no"/>
+            <input type="number" className="form-control" 
+              onChange={this.logChange} 
+              name="addEmpNo"
+            />
           </div>
           <div className="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
-            <select className="form-control" style={{margin:"1em 0 0 1em"}}>
-              <option>d001 Marketing</option>
-              <option>d002 Finance</option>
-              <option>d003 Human Resources</option>
-              <option>d004 Production</option>
-              <option>d005 Development</option>
-              <option>d006 Quality Management</option>
-              <option>d007 Sales</option>
-              <option>d008 Research</option>
-              <option>d009 Sales</option>
+            <select className="form-control" 
+              onChange={this.logChange} 
+              name="addDeptNo" 
+              style={{margin:"1em 0 0 1em"}}
+            >
+              <option value="d001">Marketing</option>
+              <option value="d002">Finance</option>
+              <option value="d003">Human Resources</option>
+              <option value="d004">Production</option>
+              <option value="d005">Development</option>
+              <option value="d006">Quality Management</option>
+              <option value="d007">Sales</option>
+              <option value="d008">Research</option>
+              <option value="d009">Customer Service</option>
             </select>
           </div>
         </div>
-        <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Create</button>
+        <button className="btn btn-success" 
+          style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}
+        >Create</button>
       </form>
 
      );
@@ -618,20 +697,20 @@ export default class EmployeeTable extends React.Component {
                   null
                 }
               </h2>
-				<div className="container" style={{ padding: "0px 15%", marginBottom: "1em" }}>
-					<Pagination
-						activePage={activePage}
-						boundaryRange={boundaryRange}
-						onPageChange={this.handlePaginationChange}
-						siblingRange={siblingRange}
-						totalPages={totalPages}
+    				<div className="container" style={{ padding: "0px 15%", marginBottom: "1em" }}>
+    					<Pagination
+    						activePage={activePage}
+    						boundaryRange={boundaryRange}
+    						onPageChange={this.handlePaginationChange}
+    						siblingRange={siblingRange}
+    						totalPages={totalPages}
 
-						firstItem={showFirstAndLastNav ? undefined : null}
-						lastItem={showFirstAndLastNav ? undefined : null}
-						prevItem={showPreviousAndNextNav ? undefined : null}
-						nextItem={showPreviousAndNextNav ? undefined : null}
-					/>
-				</div>
+    						firstItem={showFirstAndLastNav ? undefined : null}
+    						lastItem={showFirstAndLastNav ? undefined : null}
+    						prevItem={showPreviousAndNextNav ? undefined : null}
+    						nextItem={showPreviousAndNextNav ? undefined : null}
+    					/>
+    				</div>
             </div>
             <table className="table">
               <thead>
@@ -675,6 +754,14 @@ export default class EmployeeTable extends React.Component {
                     }
                     </button>
                   </th>
+                  {
+                    !this.state.isDepartment ?
+                  <th scope="col">
+                    <button className="btn btn-light">
+                      Department
+                    </button>
+                  </th> : null
+                  }
                   <Can
                     role={user.role}
                     perform="employee:edit"
@@ -783,6 +870,20 @@ export default class EmployeeTable extends React.Component {
                         <td>{employee.emp_no}</td>
                         <td>{employee.first_name +" "+ employee.last_name}</td>
                         <td>{employee.title}</td>
+                        { !this.state.isDepartment ?
+                        <td>
+                          {employee.dept_no === "d001" ? "Marketing" : 
+                          employee.dept_no === "d002" ? "Finance" :
+                          employee.dept_no === "d003" ? "Human Resources" :
+                          employee.dept_no === "d004" ? "Production" :
+                          employee.dept_no === "d005" ? "Development" :
+                          employee.dept_no === "d006" ? "Quality Management" :
+                          employee.dept_no === "d007" ? "Sales" :
+                          employee.dept_no === "d008" ? "Research" :
+                          employee.dept_no === "d009" ? "Customer Service" : null
+                        }
+                        </td> : null 
+                        }
                         <td>
                           <Can
                             role={user.role}
@@ -824,7 +925,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:edit"
                             yes={() => (
-                              <EmployeeEditButton emp={employee}/>
+                              <EmployeeEditButton emp={employee} isDepartment={this.state.isDepartment} currentDept={this.state.currentDept}/>
                             )}
                           />
                         </td>
@@ -833,7 +934,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:delete"
                             yes={() => (
-                              <EmployeeDeleteButton emp={employee}/>
+                              <EmployeeDeleteButton emp={employee} isDepartment={this.state.isDepartment} currentDept={this.state.currentDept}/>
                             )}
                           />
                         </td>

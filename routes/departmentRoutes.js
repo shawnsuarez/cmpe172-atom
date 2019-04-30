@@ -11,7 +11,7 @@ router.get("/:dept/:page", (req, res) => {
 		page = 0;
 
 	connection.query(
-		`SELECT e.emp_no, first_name, last_name, title, salary, s.from_date, s.to_date, hire_date 
+		`SELECT e.emp_no, first_name, last_name, title, salary, s.from_date, s.to_date, hire_date, de.dept_no 
 		FROM dept_emp de
 				INNER JOIN 
 				(SELECT dept_no 
@@ -29,6 +29,64 @@ router.get("/:dept/:page", (req, res) => {
 		(error, results, fields) => {
 			if (error) throw error;
 			res.json(results);
+	});
+});
+
+// Create employee
+router.post("/:dept/addemployee", (req, res) => {
+	let empNo = req.body.emp_no;
+
+	connection.query(
+		`INSERT INTO EMPLOYEES(emp_no, first_name, last_name, hire_date) VALUES ( ?, ?, ?, ?);
+		INSERT INTO DEPT_EMP(emp_no, dept_no) VALUES ( ?, ?);
+		INSERT INTO SALARIES(emp_no, salary, from_date, to_date) VALUES ( ?, ?, ?, ?);
+		INSERT INTO TITLES(emp_no, title) VALUES ( ?, ?);`, 
+		[ empNo, req.body.first_name, req.body.last_name, req.body.hire_date,
+			empNo, req.body.dept_no,
+			empNo, req.body.salary, req.body.from_date, req.body.to_date,
+			empNo, req.body.empTitle],
+		(error, results, fields) => {
+			if(error) throw error;
+			res.json(results);
+		}
+	);
+});
+
+// Update employee
+router.post("/:dept/edit", (req, res) => {
+	let empNo = req.body.emp_no;
+
+	connection.query(
+	`UPDATE SALARIES
+	SET salary = ?, from_date = ?, to_date = ?
+	WHERE emp_no = ?;
+	UPDATE dept_emp
+	SET dept_no = ?
+	WHERE emp_no = ?;
+	UPDATE TITLES
+	SET title = ?
+	WHERE emp_no = ?;`,
+	[ req.body.salary, req.body.from_date, req.body.to_date, 
+		empNo, 
+		req.body.dept_no,
+		empNo,
+		req.body.title,
+		empNo],
+	(error, results, fields) => {
+		if (error) throw error;
+		res.json(results);
+	});
+});
+
+// Delete employee
+router.post("/:dept/delete", (req, res) => {
+	let empNo = req.body.emp_no;
+	connection.query(
+	`DELETE FROM EMPLOYEES WHERE emp_no = ?;`,
+	[empNo],
+	(error, results, fields) => {
+		if (error) throw error;
+		res.json(results);
 	});
 });
 

@@ -66,13 +66,13 @@ class TestEmployeePage extends Component {
 
 	handleDelete(emp_no) {
 		let data = { emp_no : emp_no }
-		let url = "./delete";
-
+		let url = "/employeestest/delete";
 		fetch(url, { 
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify(data) })
 		.then((response) => {
+			console.log(response);
 			if (response.status >= 400) {
 				throw new Error("Bad response from server");
 			} 
@@ -80,7 +80,7 @@ class TestEmployeePage extends Component {
 		}).catch(function(err) {
 			console.log(err)
 		});
-		window.location.reload();
+		//window.location.reload();
 	}
 
 	render() {
