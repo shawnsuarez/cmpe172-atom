@@ -54,17 +54,24 @@ router.post("/:dept/addemployee", (req, res) => {
 
 // Update employee
 router.post("/:dept/edit", (req, res) => {
+	let empNo = req.body.emp_no;
+
 	connection.query(
-	`UPDATE SALARIES 
-	SET salary = ?, from_date = ?, to_date = ? 
+	`UPDATE SALARIES
+	SET salary = ?, from_date = ?, to_date = ?
 	WHERE emp_no = ?;
-	UPDATE DEPT_EMP
+	UPDATE dept_emp
 	SET dept_no = ?
+	WHERE emp_no = ?;
+	UPDATE TITLES
+	SET title = ?
 	WHERE emp_no = ?;`,
 	[ req.body.salary, req.body.from_date, req.body.to_date, 
-		req.body.emp_no, 
+		empNo, 
 		req.body.dept_no,
-		req.body.emp_no],
+		empNo,
+		req.body.title,
+		empNo],
 	(error, results, fields) => {
 		if (error) throw error;
 		res.json(results);

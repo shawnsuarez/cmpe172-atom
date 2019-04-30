@@ -26,11 +26,11 @@ class Navbar extends Component {
               {
                 window.location.href.indexOf("departments") > -1 ?
                 <li className="nav-item active">
-                  <Link className="nav-link" to="/departments" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>Departments</Link>
+                  <Link className="nav-link" to="/departments/marketing" style={{background:"#343a40",color:"white",borderRadius:"5px"}}>Departments</Link>
                 </li>
                 :
                 <li className="nav-item">
-                  <Link className="nav-link" to="/departments">Departments</Link>
+                  <Link className="nav-link" to="/departments/marketing">Departments</Link>
                 </li>
               }
               {

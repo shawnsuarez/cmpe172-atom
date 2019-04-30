@@ -7,10 +7,13 @@ import Can from '../components/Can';
 import EmployeeTable from '../components/EmployeeTable';
 
 class DepartmentPage extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      currentDept: "Marketing"
+      currentDept: this.props.match.params.dept.toLowerCase()
+        .split(' ')
+        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(' ')
     }
   }
 
@@ -34,9 +37,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Marketing" ?
-                            <a className="dropdown-item active" href="#">Marketing</a>
+                            <a className="dropdown-item active" href="/departments/marketing">Marketing</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/marketing" onClick={() => {
                               this.setState({
                                 currentDept:"Marketing"
                               })
@@ -46,9 +49,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Finance" ?
-                            <a className="dropdown-item active" href="#">Finance</a>
+                            <a className="dropdown-item active" href="/departments/finance">Finance</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/finance" onClick={() => {
                               this.setState({
                                 currentDept:"Finance"
                               })
@@ -58,9 +61,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Human Resources" ?
-                            <a className="dropdown-item active" href="#">Human Resources</a>
+                            <a className="dropdown-item active" href="/departments/human resources">Human Resources</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/human resources" onClick={() => {
                               this.setState({
                                 currentDept:"Human Resources"
                               })
@@ -70,9 +73,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Production" ?
-                            <a className="dropdown-item active" href="#">Production</a>
+                            <a className="dropdown-item active" href="/departments/production">Production</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/production" onClick={() => {
                               this.setState({
                                 currentDept:"Production"
                               })
@@ -82,9 +85,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Development" ?
-                            <a className="dropdown-item active" href="#">Development</a>
+                            <a className="dropdown-item active" href="/departments/development">Development</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/development" onClick={() => {
                               this.setState({
                                 currentDept:"Development"
                               })
@@ -94,9 +97,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Quality Management" ?
-                            <a className="dropdown-item active" href="#">Quality Management</a>
+                            <a className="dropdown-item active" href="/departments/quality management">Quality Management</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/quality management" onClick={() => {
                               this.setState({
                                 currentDept:"Quality Management"
                               })
@@ -106,9 +109,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Sales" ?
-                            <a className="dropdown-item active" href="#">Sales</a>
+                            <a className="dropdown-item active" href="/departments/sales">Sales</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/sales" onClick={() => {
                               this.setState({
                                 currentDept:"Sales"
                               })
@@ -118,9 +121,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Research" ?
-                            <a className="dropdown-item active" href="#">Research</a>
+                            <a className="dropdown-item active" href="/departments/research">Research</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/research" onClick={() => {
                               this.setState({
                                 currentDept:"Research"
                               })
@@ -130,9 +133,9 @@ class DepartmentPage extends React.Component {
                         <li>
                           {
                             this.state.currentDept === "Customer Service" ?
-                            <a className="dropdown-item active" href="#">Customer Service</a>
+                            <a className="dropdown-item active" href="/departments/customer service">Customer Service</a>
                             :
-                            <a className="dropdown-item" href="#" onClick={() => {
+                            <a className="dropdown-item" href="/departments/customer service" onClick={() => {
                               this.setState({
                                 currentDept:"Customer Service"
                               })

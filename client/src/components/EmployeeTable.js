@@ -17,7 +17,7 @@ export default class EmployeeTable extends React.Component {
       maxPage: 5,
       activePage: 1,
       boundaryRange: 1,
-      siblingRange: 2,
+      siblingRange: 3,
       showEllipsis: true,
       showFirstAndLastNav: true,
       showPreviousAndNextNav: true,
@@ -117,7 +117,7 @@ export default class EmployeeTable extends React.Component {
 
   getResults = (page) => {
   if (!this.state.isDepartment) {
-    let url = "./dashboard/" + page;
+    let url = "/dashboard/" + page;
     fetch(url, { method: "GET" })
       .then(response => response.json())
       //.then(response => response.text())
@@ -144,7 +144,7 @@ export default class EmployeeTable extends React.Component {
       .catch(error => console.log(error));
   }
   else {
-    let url = "./departments/" + this.state.currentDept + "/" + page; 
+    let url = "/departments/" + this.state.currentDept + "/" + page; 
     fetch(url, { method: "GET" })
       .then(response => response.json())
       //.then(response => response.text())
@@ -659,7 +659,7 @@ export default class EmployeeTable extends React.Component {
               <option value="d006">Quality Management</option>
               <option value="d007">Sales</option>
               <option value="d008">Research</option>
-              <option value="d009">Sales</option>
+              <option value="d009">Customer Service</option>
             </select>
           </div>
         </div>
@@ -697,20 +697,20 @@ export default class EmployeeTable extends React.Component {
                   null
                 }
               </h2>
-				<div className="container" style={{ padding: "0px 15%", marginBottom: "1em" }}>
-					<Pagination
-						activePage={activePage}
-						boundaryRange={boundaryRange}
-						onPageChange={this.handlePaginationChange}
-						siblingRange={siblingRange}
-						totalPages={totalPages}
+    				<div className="container" style={{ padding: "0px 15%", marginBottom: "1em" }}>
+    					<Pagination
+    						activePage={activePage}
+    						boundaryRange={boundaryRange}
+    						onPageChange={this.handlePaginationChange}
+    						siblingRange={siblingRange}
+    						totalPages={totalPages}
 
-						firstItem={showFirstAndLastNav ? undefined : null}
-						lastItem={showFirstAndLastNav ? undefined : null}
-						prevItem={showPreviousAndNextNav ? undefined : null}
-						nextItem={showPreviousAndNextNav ? undefined : null}
-					/>
-				</div>
+    						firstItem={showFirstAndLastNav ? undefined : null}
+    						lastItem={showFirstAndLastNav ? undefined : null}
+    						prevItem={showPreviousAndNextNav ? undefined : null}
+    						nextItem={showPreviousAndNextNav ? undefined : null}
+    					/>
+    				</div>
             </div>
             <table className="table">
               <thead>
@@ -754,9 +754,14 @@ export default class EmployeeTable extends React.Component {
                     }
                     </button>
                   </th>
+                  {
+                    !this.state.isDepartment ?
                   <th scope="col">
-                    Dept
-                  </th>
+                    <button className="btn btn-light">
+                      Department
+                    </button>
+                  </th> : null
+                  }
                   <Can
                     role={user.role}
                     perform="employee:edit"
@@ -865,7 +870,20 @@ export default class EmployeeTable extends React.Component {
                         <td>{employee.emp_no}</td>
                         <td>{employee.first_name +" "+ employee.last_name}</td>
                         <td>{employee.title}</td>
-                        <td>{employee.dept_no}</td>
+                        { !this.state.isDepartment ?
+                        <td>
+                          {employee.dept_no === "d001" ? "Marketing" : 
+                          employee.dept_no === "d002" ? "Finance" :
+                          employee.dept_no === "d003" ? "Human Resources" :
+                          employee.dept_no === "d004" ? "Production" :
+                          employee.dept_no === "d005" ? "Development" :
+                          employee.dept_no === "d006" ? "Quality Management" :
+                          employee.dept_no === "d007" ? "Sales" :
+                          employee.dept_no === "d008" ? "Research" :
+                          employee.dept_no === "d009" ? "Customer Service" : null
+                        }
+                        </td> : null 
+                        }
                         <td>
                           <Can
                             role={user.role}

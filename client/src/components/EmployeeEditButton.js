@@ -124,7 +124,7 @@ class EmployeeEditButton extends React.Component {
               <option value="d006">Quality Management</option>
               <option value="d007">Sales</option>
               <option value="d008">Research</option>
-              <option value="d009">Sales</option>
+              <option value="d009">Customer Service</option>
             </select>
           </div>
         </div>
