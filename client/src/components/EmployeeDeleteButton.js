@@ -29,9 +29,10 @@ class EmployeeDeleteButton extends React.Component{
     let data = { emp_no : empNo }
     let url;
     if (this.state.isDepartment)
-      url = "/departments/delete";
+      url = "/departments/" + this.state.currentDept + "/delete";
     else
       url = "/dashboard/delete";
+    console.log(url);
     fetch(url, { 
       method: 'POST',
       headers: { "Content-Type": "application/json"},
@@ -54,9 +55,13 @@ class EmployeeDeleteButton extends React.Component{
           <li className="list-group-item"> <b>Name:</b> {this.props.emp.first_name + " " + this.props.emp.last_name}</li>
           <li className="list-group-item"> <b>Hire Date:</b> {this.props.emp.hire_date.substring(0,10)}</li>
           <li className="list-group-item"> <b>Salary:</b> {this.props.emp.salary}</li>
-          <li className="list-group-item"> <b>From - To:</b> {this.props.emp.from_date.substring(0,10) + " " + this.props.emp.to_date.substring(0,10)}</li>
+          <li className="list-group-item"> <b>From:</b> {this.props.emp.from_date.substring(0,10)}</li>
+          <li className="list-group-item"> <b>To:</b> {this.props.emp.to_date.substring(0,10)}</li>
         </ul>
-        <button className="btn btn-danger" onClick={() => this.handleDelete(this.props.emp.emp_no)} style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Delete</button>
+        <button className="btn btn-danger" 
+          onClick={() => this.handleDelete(this.props.emp.emp_no)} 
+          style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}
+        >Delete</button>
       </div>
     );
 

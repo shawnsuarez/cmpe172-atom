@@ -89,49 +89,87 @@ export default class EmployeeTable extends React.Component {
       to_date: this.state.addToDate,
       empTitle: this.state.addEmpTitle
     }
-
-    if (!this.state.isDepartment) {
-      let url = "./dashboard/addemployee";
-      fetch(url, { 
-          method: "POST",
-          headers: {"Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        })
-        .then((response) => {
-            if (response.status >= 400) {
-              throw new Error("Bad response from server");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data)    
-        })
-        .catch(error => console.log(error));
-    }
-    else {
-      let url = "./departments/" + this.state.currentDept + "/addemployee"; 
-      fetch(url, { 
-          method: "POST",
-          headers: {"Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        })
-        .then((response) => {
-            if (response.status >= 400) {
-              throw new Error("Bad response from server");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data)    
-        })
-        .catch(error => console.log(error));
-    }
+    let url;
+    if (this.state.isDepartment)
+      url = "/departments/" + this.state.currentDept + "/addemployee";
+    else
+      url = "/dashboard/addemployee";
+    fetch(url, { 
+      method: 'POST',
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        window.location.reload();
+    }).catch((err) => {
+        console.log(err)
+    }); 
     this.closeAddEmployeeModal();
   }
 
   logChange(e) {
     let stateObj = { [e.target.name]: e.target.value }
     this.setState(stateObj);
+  }
+
+  getResults = (page) => {
+  if (!this.state.isDepartment) {
+    let url = "./dashboard/" + page;
+    fetch(url, { method: "GET" })
+      .then(response => response.json())
+      //.then(response => response.text())
+      //.then(text => console.log(text))
+      .then(employees => {
+        this.setState({showAddModal: false,
+          employees,
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false})
+      })
+      .catch(error => console.log(error));
+  }
+  else {
+    let url = "./departments/" + this.state.currentDept + "/" + page; 
+    fetch(url, { method: "GET" })
+      .then(response => response.json())
+      //.then(response => response.text())
+      //.then(text => console.log(text))
+      .then(employees => {
+        this.setState({showAddModal: false,
+          employees,
+        sortedByID: false,
+        sortedByName: false,
+        sortedByTitle: false,
+        sortedByHireDate: false,
+        sortedBySalary: false,
+        sortedByFrom: false,
+        sortedByTo: false,
+
+        sortedByIDReversed: false,
+        sortedByNameReversed: false,
+        sortedByTitleReversed: false,
+        sortedByHireDateReversed: false,
+        sortedBySalaryReversed: false,
+        sortedByFromReversed: false,
+        sortedByToReversed: false})
+      })
+      .catch(error => console.log(error));
+    }
   }
 
   openAddEmployeeModal(){
@@ -526,64 +564,6 @@ export default class EmployeeTable extends React.Component {
     }
   }
 
-
-	getResults = (page) => {
-		if (!this.state.isDepartment) {
-			let url = "./dashboard/" + page;
-			fetch(url, { method: "GET" })
-				.then(response => response.json())
-				//.then(response => response.text())
-				//.then(text => console.log(text))
-				.then(employees => {
-	        this.setState({showAddModal: false,
-	          employees,
-	        sortedByID: false,
-	        sortedByName: false,
-	        sortedByTitle: false,
-	        sortedByHireDate: false,
-	        sortedBySalary: false,
-	        sortedByFrom: false,
-	        sortedByTo: false,
-
-	        sortedByIDReversed: false,
-	        sortedByNameReversed: false,
-	        sortedByTitleReversed: false,
-	        sortedByHireDateReversed: false,
-	        sortedBySalaryReversed: false,
-	        sortedByFromReversed: false,
-	        sortedByToReversed: false})
-	      })
-				.catch(error => console.log(error));
-		}
-		else {
-			let url = "./departments/" + this.state.currentDept + "/" + page; 
-			fetch(url, { method: "GET" })
-				.then(response => response.json())
-				//.then(response => response.text())
-				//.then(text => console.log(text))
-				.then(employees => {
-	        this.setState({showAddModal: false,
-	          employees,
-	        sortedByID: false,
-	        sortedByName: false,
-	        sortedByTitle: false,
-	        sortedByHireDate: false,
-	        sortedBySalary: false,
-	        sortedByFrom: false,
-	        sortedByTo: false,
-
-	        sortedByIDReversed: false,
-	        sortedByNameReversed: false,
-	        sortedByTitleReversed: false,
-	        sortedByHireDateReversed: false,
-	        sortedBySalaryReversed: false,
-	        sortedByFromReversed: false,
-	        sortedByToReversed: false})
-	      })
-				.catch(error => console.log(error));
-		}
-	}
-
   render(){
     const {
         activePage,
@@ -599,46 +579,78 @@ export default class EmployeeTable extends React.Component {
       <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}} onSubmit={this.handleAddEmployee}>
         <div className="form-row">
           <div className="col">
-            <input type="text" className="form-control" onChange={this.logChange} placeholder="First name" name="addFirstName"/>
+            <input type="text" className="form-control" 
+              onChange={this.logChange} 
+              placeholder="First name" 
+              name="addFirstName"
+            />
           </div>
           <div className="col">
-            <input type="text" className="form-control" onChange={this.logChange} placeholder="Last name" name="addLastName"/>
+            <input type="text" className="form-control" 
+              onChange={this.logChange} 
+              placeholder="Last name" 
+              name="addLastName"
+            />
           </div>
         </div>
         <div className="form-row">
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
-            <input type="date" className="form-control" onChange={this.logChange} name="addHireDate" />
+            <input type="date" className="form-control" 
+              onChange={this.logChange} 
+              name="addHireDate" 
+            />
           </div>
         </div>
         <div className="input-group mb-3" style={{margin:"0 0 0 14px"}}>
           <div className="input-group-prepend">
             <span className="input-group-text">$</span>
           </div>
-          <input type="number" className="form-control" min="1" step="100" style={{margin:"0 0 0 0"}} onChange={this.logChange} placeholder="Salary" name="addSalary"/>
+          <input type="number" className="form-control" 
+            style={{margin:"0 0 0 0"}} 
+            onChange={this.logChange} 
+            placeholder="Salary" 
+            name="addSalary"
+          />
         </div>
         <div className="form-row" >
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>From:</label>
-            <input type="date" className="form-control" onChange={this.logChange} name="addFromDate"/>
+            <input type="date" className="form-control" 
+              onChange={this.logChange} 
+              name="addFromDate"
+            />
           </div>
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>To:</label>
-            <input type="date" className="form-control" onChange={this.logChange} name="addToDate"/>
+            <input type="date" className="form-control" 
+              onChange={this.logChange} 
+              name="addToDate"
+            />
           </div>
         </div>
         <div className="form-row" >
           <div className="form-group col-md-5">
             <label style={{margin:"0 0 0 18px"}}>Employee Title:</label>
-            <input type="text" className="form-control" onChange={this.logChange} name="addEmpTitle"/>
+            <input type="text" className="form-control" 
+              onChange={this.logChange} 
+              name="addEmpTitle"
+            />
           </div>
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 16px"}}>Employee ID:</label>
-            <input type="number" className="form-control" onChange={this.logChange} name="addEmpNo"/>
+            <input type="number" className="form-control" 
+              onChange={this.logChange} 
+              name="addEmpNo"
+            />
           </div>
           <div className="form-group col-md-3">
             <label style={{margin:"0 0 0 16px"}}>Dept #:</label>
-            <select className="form-control" onChange={this.logChange} name="addDeptNo" style={{margin:"1em 0 0 1em"}}>
+            <select className="form-control" 
+              onChange={this.logChange} 
+              name="addDeptNo" 
+              style={{margin:"1em 0 0 1em"}}
+            >
               <option value="d001">Marketing</option>
               <option value="d002">Finance</option>
               <option value="d003">Human Resources</option>
@@ -651,7 +663,9 @@ export default class EmployeeTable extends React.Component {
             </select>
           </div>
         </div>
-        <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Create</button>
+        <button className="btn btn-success" 
+          style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}
+        >Create</button>
       </form>
 
      );
@@ -739,6 +753,9 @@ export default class EmployeeTable extends React.Component {
                       "Title"
                     }
                     </button>
+                  </th>
+                  <th scope="col">
+                    Dept
                   </th>
                   <Can
                     role={user.role}
@@ -848,6 +865,7 @@ export default class EmployeeTable extends React.Component {
                         <td>{employee.emp_no}</td>
                         <td>{employee.first_name +" "+ employee.last_name}</td>
                         <td>{employee.title}</td>
+                        <td>{employee.dept_no}</td>
                         <td>
                           <Can
                             role={user.role}
@@ -889,7 +907,7 @@ export default class EmployeeTable extends React.Component {
                             role={user.role}
                             perform="employee:edit"
                             yes={() => (
-                              <EmployeeEditButton emp={employee}/>
+                              <EmployeeEditButton emp={employee} isDepartment={this.state.isDepartment} currentDept={this.state.currentDept}/>
                             )}
                           />
                         </td>
