@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import {AuthConsumer} from '../authContext';
 import Can from '../components/Can';
+import MarketingTable from '../components/MarketingTable';
 
 class DepartmentPage extends React.Component {
   constructor(){
@@ -24,7 +25,7 @@ class DepartmentPage extends React.Component {
               yes={() => (
                 <div>
                   <Navbar/>
-                  <div style={{padding:"1em"}}>
+                  <div style={{padding:"1em 1em 0 1em", widht:"200px", maxWidth:"500px", display:"inline-block"}}>
                     <div className="dropdown">
                       <h2 id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {this.state.currentDept + " ↓"}
@@ -44,26 +45,14 @@ class DepartmentPage extends React.Component {
                         </li>
                         <li>
                           {
-                            this.state.currentDept === "Accounting" ?
-                            <a className="dropdown-item active" href="#">Accounting</a>
+                            this.state.currentDept === "Finance" ?
+                            <a className="dropdown-item active" href="#">Finance</a>
                             :
                             <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
-                                currentDept:"Accounting"
+                                currentDept:"Finance"
                               })
-                            }}>Accounting</a>
-                          }
-                        </li>
-                        <li>
-                          {
-                            this.state.currentDept === "Research & Development" ?
-                            <a className="dropdown-item active" href="#">Research & Development</a>
-                            :
-                            <a className="dropdown-item" href="#" onClick={() => {
-                              this.setState({
-                                currentDept:"Research & Development"
-                              })
-                            }}>Research & Development</a>
+                            }}>Finance</a>
                           }
                         </li>
                         <li>
@@ -80,19 +69,109 @@ class DepartmentPage extends React.Component {
                         </li>
                         <li>
                           {
-                            this.state.currentDept === "Purchasing" ?
-                            <a className="dropdown-item active" href="#">Purchasing</a>
+                            this.state.currentDept === "Production" ?
+                            <a className="dropdown-item active" href="#">Production</a>
                             :
                             <a className="dropdown-item" href="#" onClick={() => {
                               this.setState({
-                                currentDept:"Purchasing"
+                                currentDept:"Production"
                               })
-                            }}>Purchasing</a>
+                            }}>Production</a>
+                          }
+                        </li>
+                        <li>
+                          {
+                            this.state.currentDept === "Development" ?
+                            <a className="dropdown-item active" href="#">Development</a>
+                            :
+                            <a className="dropdown-item" href="#" onClick={() => {
+                              this.setState({
+                                currentDept:"Development"
+                              })
+                            }}>Development</a>
+                          }
+                        </li>
+                        <li>
+                          {
+                            this.state.currentDept === "Quality Management" ?
+                            <a className="dropdown-item active" href="#">Quality Management</a>
+                            :
+                            <a className="dropdown-item" href="#" onClick={() => {
+                              this.setState({
+                                currentDept:"Quality Management"
+                              })
+                            }}>Quality Management</a>
+                          }
+                        </li>
+                        <li>
+                          {
+                            this.state.currentDept === "Sales" ?
+                            <a className="dropdown-item active" href="#">Sales</a>
+                            :
+                            <a className="dropdown-item" href="#" onClick={() => {
+                              this.setState({
+                                currentDept:"Sales"
+                              })
+                            }}>Sales</a>
+                          }
+                        </li>
+                        <li>
+                          {
+                            this.state.currentDept === "Research" ?
+                            <a className="dropdown-item active" href="#">Research</a>
+                            :
+                            <a className="dropdown-item" href="#" onClick={() => {
+                              this.setState({
+                                currentDept:"Research"
+                              })
+                            }}>Research</a>
+                          }
+                        </li>
+                        <li>
+                          {
+                            this.state.currentDept === "Customer Service" ?
+                            <a className="dropdown-item active" href="#">Customer Service</a>
+                            :
+                            <a className="dropdown-item" href="#" onClick={() => {
+                              this.setState({
+                                currentDept:"Customer Service"
+                              })
+                            }}>Customer Service</a>
                           }
                         </li>
                       </ul>
                     </div>
                   </div>
+                  {
+                    this.state.currentDept == 'Marketing' ?
+                    <MarketingTable/>
+                    :
+                    this.state.currentDept == 'Finance' ?
+                    <h1>Finance Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Human Resources' ?
+                    <h1>Human Resources Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Production' ?
+                    <h1>Production Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Development' ?
+                    <h1>Development Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Quality Management' ?
+                    <h1>Quality Management Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Sales' ?
+                    <h1>Sales Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Research' ?
+                    <h1>Research Dept Table</h1>
+                    :
+                    this.state.currentDept == 'Customer Service' ?
+                    <h1>Customer Service Dept Table</h1>
+                    :
+                    null
+                  }
                 </div>
               )}
               no={() => <Redirect to="/" />}

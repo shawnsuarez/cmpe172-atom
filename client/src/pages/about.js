@@ -17,7 +17,7 @@ const AboutPage = () => {
               <div>
                 <Navbar user={user}/>
                 <div style={{padding:"1em"}}>
-                  <h6>Made by Sukhvir Singh, Shawn Darrell Suarez, Xueli Yang</h6>
+                  <p>Made by <b>Sukhvir Singh</b>, <b>Shawn Darrell Suarez</b>, and <b>Xueli Yang</b></p>
                 </div>
               </div>
             )}

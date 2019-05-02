@@ -24,63 +24,12 @@ class EmployeeEditButton extends React.Component {
   }
 
   handleEdit() {
-  	
+
   }
 
   render(){
     var editForm = (
-      {/*
-      <form>
-          <div className="form-group" style={{margin:"1em 0"}}>
-            First name:
-            <input type="text" name="first_name" placeholder={this.props.emp.first_name} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Last name:
-            <input type="text" name="last_name" placeholder={this.props.emp.last_name} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Email:
-            <input type="text" name="email" placeholder={this.props.emp.email} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Hire Date:
-            <input type="text" name="hire_date" placeholder={this.props.emp.hire_date} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            Salary:
-            <input type="text" name="salary" placeholder={this.props.emp.salary} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            From:
-            <input type="text" name="from_date" placeholder={this.props.emp.from_date} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <div className="form-group" style={{margin:"1em 0"}}>
-            To:
-            <input type="text" name="to_date" placeholder={this.props.emp.to_date} className="form-control" style={{margin: "0 0"}}/>
-          </div>
-
-          <button className="btn btn-success" style={{bottom:"0", right:"0", position:"absolute", margin:"1em"}}>Submit</button>
-       </form>
-      */},
       <form style={{fontSize: '16px', fontWeight: '400', padding:"1em", margin:"0 0 0 -1.5em"}}>
-        <div className="form-row">
-          <div className="col">
-            <input type="text" className="form-control" placeholder={this.props.emp.first_name} />
-          </div>
-          <div className="col">
-            <input type="text" className="form-control" placeholder={this.props.emp.last_name}/>
-          </div>
-        </div>
-        <div className="form-group" style={{margin:"-14px 0 0 0"}}>
-          <input type="email" className="form-control" id="email" placeholder={this.props.emp.first_name.toLowerCase() + this.props.emp.last_name.toLowerCase() + "@atompayroll.com"}/>
-        </div>
         <div className="form-row">
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>

@@ -488,6 +488,9 @@ export default class EmployeeTable extends React.Component {
             <input type="text" className="form-control" placeholder="Last name" />
           </div>
         </div>
+        <div className="form-group" style={{margin:"-14px 0 0 0"}}>
+          <input type="email" className="form-control" id="email" placeholder="email"/>
+        </div>
         <div className="form-row">
           <div className="form-group col-md-4">
             <label style={{margin:"0 0 0 18px"}}>Hire Date:</label>
@@ -545,7 +548,6 @@ export default class EmployeeTable extends React.Component {
           <div>
             <div>
               <h2>
-                Employees
                 <Can
                   role={user.role}
                   perform="employee:delete"
@@ -594,19 +596,6 @@ export default class EmployeeTable extends React.Component {
                       "Name ↑"
                       :
                       "Name"
-                    }
-                    </button>
-                  </th>
-                  <th scope="col">
-                    <button className="btn btn-light" onClick={this.sortByTitle}>
-                    {
-                      this.state.sortedByTitle ?
-                      "Title ↓"
-                      :
-                      this.state.sortedByTitleReversed ?
-                      "Title ↑"
-                      :
-                      "Title"
                     }
                     </button>
                   </th>
@@ -717,7 +706,6 @@ export default class EmployeeTable extends React.Component {
                       <tr key={employee.emp_no}>
                         <td>{employee.emp_no}</td>
                         <td>{employee.first_name +" "+ employee.last_name}</td>
-                        <td>{employee.title}</td>
                         <td>
                           <Can
                             role={user.role}
@@ -778,20 +766,6 @@ export default class EmployeeTable extends React.Component {
               </tbody>
 
             </table>
-            <div className="container" style={{ padding: "0px 15%"}}>
-              <Pagination
-                activePage={activePage}
-                boundaryRange={boundaryRange}
-                onPageChange={this.handlePaginationChange}
-                siblingRange={siblingRange}
-                totalPages={totalPages}
-
-                firstItem={showFirstAndLastNav ? undefined : null}
-                lastItem={showFirstAndLastNav ? undefined : null}
-                prevItem={showPreviousAndNextNav ? undefined : null}
-                nextItem={showPreviousAndNextNav ? undefined : null}
-              />
-            </div>
           </div>
         )}
       </AuthConsumer>
