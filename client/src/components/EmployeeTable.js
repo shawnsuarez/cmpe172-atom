@@ -676,7 +676,6 @@ export default class EmployeeTable extends React.Component {
           <div>
             <div>
               <h2>
-                Employees
                 <Can
                   role={user.role}
                   perform="employee:delete"
