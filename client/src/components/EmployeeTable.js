@@ -21,7 +21,7 @@ export default class EmployeeTable extends React.Component {
       showEllipsis: true,
       showFirstAndLastNav: true,
       showPreviousAndNextNav: true,
-      totalPages: 100,
+      totalPages: 50,
       employees: [],
       isDepartment: this.props.isDepartment,
       currentDept: this.props.currentDept,
